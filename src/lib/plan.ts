@@ -11,6 +11,9 @@ export const aiPostSchema = z.object({
     .string()
     .describe("Instagramの投稿文。1行目は全角20文字以内のフック。絵文字を適度に使い、改行で読みやすく。200〜350文字"),
   hashtags: z.array(z.string()).describe("ハッシュタグ。#は付けない。3〜5個"),
+  altText: z
+    .string()
+    .describe("画像の代替テキスト（目の不自由な方の読み上げや検索に使われる）。写真に写っているものを日本語1文で"),
   reelIdea: z.string().describe("同じテーマをリール（15秒ほどの縦長動画）にする場合の撮り方。1〜2文"),
   imageScene: z
     .string()
@@ -20,13 +23,22 @@ export const aiPostSchema = z.object({
 
 export const aiPlanSchema = z.object({
   overview: z.string().describe("この1週間の投稿方針を2〜3文で"),
+  searchKeywords: z
+    .array(z.string())
+    .describe("お客様がInstagramやGoogleでこのお店を探すときに入力しそうな言葉。5〜8個。複数語は半角空白で区切る"),
+  profileName: z.string().describe("Instagramの名前欄の例。店名と、検索されやすい言葉を組み合わせて全角30文字以内"),
   posts: z.array(aiPostSchema),
 });
 
-export type Post = Omit<z.infer<typeof aiPostSchema>, "reelIdea"> & { reelIdea?: string } &
+// reelIdea・altText・goal・keywords は、機能を足す前に作った投稿案には無い
+export type Post = Omit<z.infer<typeof aiPostSchema>, "reelIdea" | "altText"> & {
+  reelIdea?: string;
+  altText?: string;
+} &
   ScheduleSlot & {
-    // 狙う反応。この機能を入れる前に作った投稿案には無い
     goal?: Goal;
+    // 本文に含まれている検索ワード
+    keywords?: string[];
     riskyWords: string[];
   };
 
@@ -35,6 +47,8 @@ export type Plan = {
   createdAt: string;
   input: PlanInput;
   overview: string;
+  searchKeywords?: string[];
+  profileName?: string;
   posts: Post[];
 };
 

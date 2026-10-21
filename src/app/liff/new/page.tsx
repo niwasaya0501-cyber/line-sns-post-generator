@@ -25,6 +25,7 @@ export default function NewPlanPage() {
   const [concept, setConcept] = useState("");
   const [showDetails, setShowDetails] = useState(false);
   const [shopName, setShopName] = useState("");
+  const [area, setArea] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("daily");
   const [event, setEvent] = useState("");
   const [strengths, setStrengths] = useState("");
@@ -65,7 +66,7 @@ export default function NewPlanPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           idToken,
-          input: { industry, concept, shopName, frequency, event, strengths, target },
+          input: { industry, concept, shopName, area, frequency, event, strengths, target },
         }),
       });
       if (!res.ok) {
@@ -170,6 +171,20 @@ export default function NewPlanPage() {
                   onChange={(e) => setShopName(e.target.value)}
                   maxLength={30}
                   placeholder="例: HAIR SALON NIWA"
+                  className="field mt-2"
+                />
+              </label>
+
+              <label className="block">
+                <span className="font-bold">エリア（駅名・地域名）</span>
+                <span className="block text-sm text-muted">
+                  <span aria-hidden>🔍 </span>「地名＋業種」で探す人に見つかりやすくなります
+                </span>
+                <input
+                  value={area}
+                  onChange={(e) => setArea(e.target.value)}
+                  maxLength={30}
+                  placeholder="例: 吉祥寺駅、福岡市中央区"
                   className="field mt-2"
                 />
               </label>

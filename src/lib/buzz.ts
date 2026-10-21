@@ -59,3 +59,14 @@ export function normalizeHashtags(tags: string[]): string[] {
   const cleaned = tags.map((t) => t.replace(/^[#＃]+/, "").replace(/\s+/g, "")).filter(Boolean);
   return [...new Set(cleaned)].slice(0, MAX_HASHTAGS);
 }
+
+// Instagram内の検索は、名前欄・本文・ハッシュタグの言葉と照らし合わせて結果を出すとされる。
+// AIが考えた「お客様が検索しそうな言葉」が、各投稿の本文に入っているかを調べる。
+// 「吉祥寺 カフェ」のように空白で区切った言葉は、すべての語が本文にあれば含まれているとみなす
+export function findKeywordsInText(text: string, keywords: string[]): string[] {
+  const haystack = text.toLowerCase();
+  return keywords.filter((keyword) => {
+    const words = keyword.toLowerCase().split(/[\s　]+/).filter(Boolean);
+    return words.length > 0 && words.every((w) => haystack.includes(w));
+  });
+}

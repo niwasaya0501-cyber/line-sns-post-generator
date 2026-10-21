@@ -21,13 +21,13 @@ export const TEXT_MODELS = [
   vertex("gemini-3.1-flash-lite"),
 ];
 
-// 7枚を並列で作るため、上位版(pro)ではなく速くて安い標準版を使う
-// 画像モデルは global でしか呼べず、混雑(429)で断られやすい。
-// 待ち時間を延ばしながら、上位版（上限の枠が別。単価は高い）も交えて試す
+// 画像は軽量版（1枚 約0.034ドル。標準版の半額で、1枚4秒ほど）を使う。
+// 画像モデルは global でしか呼べず、混雑(429)で断られることがあるため、
+// 待ち時間を延ばしながら、上限の枠が別の標準版（1枚 約0.067ドル）も交えて試す
 export const IMAGE_MODELS = [
+  vertex.image("gemini-3.1-flash-lite-image"),
   vertex.image("gemini-3.1-flash-image"),
-  vertex.image("gemini-3.1-flash-image"),
-  vertex.image("gemini-3-pro-image"),
+  vertex.image("gemini-3.1-flash-lite-image"),
   vertex.image("gemini-3.1-flash-image"),
 ];
 

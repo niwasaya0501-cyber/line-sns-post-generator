@@ -1,162 +1,205 @@
 {
   "id": "sample",
-  "createdAt": "2026-10-21T06:43:02.460Z",
+  "createdAt": "2026-10-21T06:58:07.408Z",
   "input": {
     "industry": "food",
     "concept": "駅から歩いて5分、自家焙煎コーヒーと焼き菓子の小さなカフェ",
     "shopName": "こもれびカフェ",
+    "area": "吉祥寺",
     "frequency": "daily",
     "event": "10月31日まで、かぼちゃのスコーン（税込380円）を期間限定で販売",
     "strengths": "スコーンは毎朝お店で焼いています。コーヒー豆は店内で焙煎",
     "target": "近くで働く方、ひと息つきたい方"
   },
-  "overview": "自家焙煎コーヒーと焼きたてスコーンの魅力を中心に、季節限定メニューやカフェ時間を楽しむヒントを投稿します。お客様の日常のひと息を彩る情報を届け、保存や共有を促す構成にします。",
+  "overview": "自家焙煎コーヒーと毎朝焼いている焼き菓子の魅力を中心に、吉祥寺でひと息つきたい方へ向けた情報を発信します。季節限定のかぼちゃスコーンの告知と、コーヒーや焼き菓子をより楽しむためのヒントを交えて構成します。",
+  "searchKeywords": [
+    "吉祥寺 カフェ",
+    "自家焙煎コーヒー",
+    "焼き菓子",
+    "かぼちゃスコーン",
+    "吉祥寺 休憩"
+  ],
+  "profileName": "こもれびカフェ｜吉祥寺 カフェ・焼き菓子",
   "posts": [
     {
-      "theme": "かぼちゃのスコーンの楽しみ方",
-      "headline": "かぼちゃスコーンの美味しい温め方",
-      "caption": "かぼちゃスコーンを家でより美味しく食べるコツ\n\n10月31日までの限定メニュー「かぼちゃのスコーン（税込380円）」を、ご自宅で楽しむ方法をご紹介します。\n\n1. アルミホイルに包む\n2. トースターで2〜3分ほど温める\n3. そのまま1分置く\n\nこれだけで、焼きたての香ばしさが復活しますよ。\n\nぜひ保存して、おうちカフェの参考にしてくださいね。",
+      "theme": "コーヒーと焼き菓子のペアリング",
+      "headline": "相性抜群！おすすめの組合せ",
+      "caption": "コーヒーと相性抜群の組合せをご紹介します。\n\n吉祥寺のカフェで過ごすとき、飲み物と焼き菓子の組合せに迷うことはありませんか？\n\nこもれびカフェの自家焙煎コーヒーは、深煎りから浅煎りまでお選びいただけます。実は、苦味のある深煎りは甘さ控えめの焼き菓子と、酸味のある浅煎りはフルーティーな風味と合わせると、お互いの良さが引き立ちます。\n\nお好みのペアリングを探すのも楽しみの一つです。次回ご来店の際は、ぜひ店主にご相談くださいね。\n\n保存して、次回の注文時の参考にしてください。",
       "hashtags": [
-        "こもれびカフェ",
+        "吉祥寺カフェ",
         "自家焙煎コーヒー",
-        "スコーン",
-        "かぼちゃスイーツ",
-        "おうちカフェ"
+        "焼き菓子",
+        "カフェタイム",
+        "ペアリング"
       ],
-      "reelIdea": "スコーンをトースターに入れ、取り出すまでの音をASMR風に撮影する。",
-      "imageScene": "A warm-toned, top-down shot of a single golden-brown pumpkin scone placed on a minimalist ceramic plate. The background is a rustic wooden table with soft, natural light coming from the side. Plenty of empty space at the bottom for text overlay.",
+      "altText": "木のテーブルの上に置かれたコーヒーカップと、横に添えられた焼き菓子のセット。",
+      "reelIdea": "ドリップコーヒーを淹れる様子と、その横に焼き菓子が置かれる様子を短くつなげた動画。",
+      "imageScene": "A close-up, top-down view of a freshly brewed cup of black coffee in a minimalist ceramic mug, placed on a dark wooden table next to a small, crumbly baked good. The natural light from a nearby window creates soft highlights on the surface of the coffee and the pastry. The surrounding area is clean and simple, with enough negative space on the table to allow for text overlay. The overall color palette is warm and inviting, emphasizing the rich brown tones of the coffee and the golden texture of the pastry, creating a cozy atmosphere.",
       "checkItems": [
-        "トースターの具体的な加熱時間はあくまで目安であることを考慮してください"
+        "コーヒーの焙煎度合いの種類を正確に確認してください"
       ],
       "date": "2026-10-22",
       "label": "10/22(木)",
       "goal": "save",
+      "keywords": [
+        "吉祥寺 カフェ",
+        "自家焙煎コーヒー",
+        "焼き菓子"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "カフェでの休憩時間",
-      "headline": "頑張る自分にコーヒーのご褒美を",
-      "caption": "仕事の合間に、ほっと一息ついてみませんか？\n\n駅からの帰り道や、忙しい仕事の合間に「こもれびカフェ」でゆっくりした時間を。\n\n店内で丁寧に焙煎したコーヒーと、毎朝焼いている自慢のスコーンをご用意してお待ちしています。\n\n「今日もお疲れ様！」と伝えたい友だちに、ぜひこの投稿を送ってみてください。",
+      "theme": "お店の雰囲気",
+      "headline": "静かに過ごせる吉祥寺の隠れ家",
+      "caption": "吉祥寺でひと息つきたいとき、ありますよね。\n\n駅から歩いて5分の場所にある当店は、静かに自分の時間を大切にしたい方にも選ばれています。温かみのある空間で、自家焙煎コーヒーの香りに包まれてみませんか？\n\n作業の合間や、読書の時間にも。お一人でも、大切な方と一緒でも、ゆっくり過ごしていただけます。\n\n心落ち着く時間を共有したい友だちに送ってみてください。",
       "hashtags": [
-        "こもれびカフェ",
-        "自家焙煎",
-        "カフェ休憩",
-        "自分へのご褒美",
-        "仕事帰り"
+        "吉祥寺カフェ",
+        "吉祥寺休憩",
+        "カフェ巡り",
+        "静かな時間",
+        "コーヒータイム"
       ],
-      "reelIdea": "お店の入り口からコーヒーを淹れる様子までのシネマティックな短編映像。",
-      "imageScene": "A close-up shot of a steaming ceramic mug filled with dark coffee, sitting on a wooden counter. Warm sunlight filters through a nearby window, creating soft shadows. The setting is peaceful and quiet, with out-of-focus background elements suggesting a cozy cafe interior.",
+      "altText": "日の光が差し込むカフェの店内の様子。",
+      "reelIdea": "店内の入り口から入り、席に座るまでのゆったりとした視点の動画。",
+      "imageScene": "A wide shot capturing the interior of a small, tranquil cafe, focusing on a cozy corner with a wooden chair and table bathed in warm, soft afternoon sunlight. There are no people visible. In the background, there is a gentle blur of a counter area with brewing equipment, hinting at the cafe's specialized focus. The overall atmosphere is quiet, serene, and inviting, with a palette of soft creams, light browns, and natural greenery accents. The composition leaves a large, empty area on the floor or wall for potential text placement.",
       "checkItems": [
-        "駅からの所要時間「徒歩5分」は正確であるか確認してください"
+        "お店の正確な営業時間を記載してください",
+        "アクセス方法（地図など）の情報を確認してください"
       ],
       "date": "2026-10-23",
       "label": "10/23(金)",
       "goal": "share",
+      "keywords": [
+        "自家焙煎コーヒー"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "コーヒーとスコーンの組み合わせ",
-      "headline": "あなたはどっち派？コーヒーか紅茶",
-      "caption": "カフェでのひと時、飲み物は何を選びますか？\n\n「こもれびカフェ」の自家焙煎コーヒーはもちろんですが、焼きたてスコーンには紅茶もよく合いますよね。\n\nコーヒー派か、紅茶派か。みなさんのこだわりをぜひコメントで教えてください！",
+      "theme": "かぼちゃスコーンの紹介",
+      "headline": "かぼちゃスコーン、どっち派？",
+      "caption": "今だけの限定メニュー、かぼちゃスコーンはもう試しましたか？\n\n10月31日までの期間限定販売となっている、かぼちゃのスコーン（税込380円）。毎朝店内で焼いているため、外はサクッと、中はしっとりとした食感が特徴です。\n\nそのままでかぼちゃの風味を楽しむ派ですか？それとも、何か飲み物を合わせて楽しむ派でしょうか？\n\nぜひコメントで教えてください。",
       "hashtags": [
-        "こもれびカフェ",
-        "カフェタイム",
-        "スコーン好き",
-        "コーヒーの時間",
-        "紅茶派"
+        "かぼちゃスコーン",
+        "期間限定",
+        "吉祥寺カフェ",
+        "焼き菓子",
+        "秋スイーツ"
       ],
-      "reelIdea": "コーヒーを注ぐ様子と紅茶を注ぐ様子を交互に繋いだテンポの良い動画。",
-      "imageScene": "A bright, high-angle shot featuring two different drinks on a table, one with a coffee mug and one with a tea cup, alongside a plate of scones. The scene is clean and organized, focusing on the textures of the drinks and pastries. Soft, neutral background.",
+      "altText": "お皿に乗った、秋らしい色味のかぼちゃスコーン。",
+      "reelIdea": "焼き立てのスコーンを半分に割る手元のアップ動画。",
+      "imageScene": "A close-up shot of a single pumpkin scone placed on a simple, light-colored ceramic plate. The texture of the scone is clearly visible, with visible pieces of pumpkin integrated into the dough. The lighting is bright and even, casting soft shadows. The background is a blurred, neutral-colored wooden surface, providing a clean contrast. The composition is centered, leaving ample space on the upper and lower portions of the frame for text, capturing the fresh, handmade quality of the bakery item.",
       "checkItems": [
-        "紅茶の取り扱いがあるか再確認してください"
+        "10月31日までの提供である旨の事実に間違いがないか確認してください"
       ],
       "date": "2026-10-24",
       "label": "10/24(土)",
       "goal": "comment",
+      "keywords": [
+        "かぼちゃスコーン"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "朝のスコーン焼き上がり",
-      "headline": "焼きたてスコーンの香りのヒミツ",
-      "caption": "毎朝お店で焼いているスコーンのこだわり\n\n「こもれびカフェ」では、毎日その日の分を店内のオーブンで焼き上げています。\n\n焼きたては外がサクッと、中はしっとり。\nこの食感を楽しんでいただきたくて、ひとつひとつ丁寧に準備しています。\n\n美味しいスコーンの食べ方ガイドとして、保存して活用してくださいね。",
+      "theme": "スコーンの楽しみ方",
+      "headline": "家でもおいしく！温め直しのコツ",
+      "caption": "お店のスコーンを、お家で楽しむ方法をご紹介します。\n\nこもれびカフェの焼き菓子は、できるだけ早めにお召し上がりいただくのが一番ですが、持ち帰ったあとに少し温め直すと、焼きたての香りがふわりと戻ります。\n\nオーブントースターで短時間、アルミホイルに包んで温めるのがおすすめです。外側のサクッとした食感が引き立ちますよ。\n\n保存して、お家で焼き菓子を楽しむときに読み返してくださいね。",
       "hashtags": [
-        "こもれびカフェ",
-        "焼きたてスコーン",
-        "朝のルーティン",
-        "手作りおやつ",
-        "カフェ巡り"
+        "焼き菓子",
+        "スコーン",
+        "お家カフェ",
+        "吉祥寺カフェ",
+        "保存版"
       ],
-      "reelIdea": "オーブンから出したばかりのスコーンの湯気を捉えた映像。",
-      "imageScene": "An atmospheric shot of a wire cooling rack holding several fresh, golden-brown scones. The lighting is warm and golden, emphasizing the crumbly texture of the pastry. Soft focus on the background to highlight the scones in the foreground.",
+      "altText": "アルミホイルの上に置かれたスコーンのイメージ。",
+      "reelIdea": "スコーンを温め直して、コーヒーを注ぐ一連の流れ。",
+      "imageScene": "A close-up, high-angle shot of a scone resting on a piece of parchment paper or a metal tray, ready to be warmed. The lighting is warm and golden, simulating the glow of an oven or a cozy kitchen environment. The surface of the scone shows its unique, rustic texture, and there is a sense of preparation. The background is slightly out of focus, featuring kitchen or cafe elements in muted tones of beige and brown to keep the focus entirely on the food. Plenty of empty space surrounds the subject.",
       "checkItems": [
-        "「毎朝焼いている」という事実に齟齬がないか確認してください"
+        "温め直しの方法は一般的なものとして適切か確認してください"
       ],
       "date": "2026-10-25",
       "label": "10/25(日)",
       "goal": "save",
+      "keywords": [
+        "焼き菓子"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "期間限定メニューの告知",
-      "headline": "10/31まで！かぼちゃのスコーン",
-      "caption": "期間限定のかぼちゃスコーン、もう食べましたか？\n\n秋の味覚をたっぷり詰め込んだ「かぼちゃのスコーン（税込380円）」は、10月31日までの限定販売です。\n\n季節の移ろいを感じながら、コーヒーと一緒にゆっくり味わってみてください。\n\nお店の営業時間は【要確認】です。お近くにお越しの際はぜひお立ち寄りください。",
+      "theme": "キャンペーン告知",
+      "headline": "期間限定！かぼちゃスコーン",
+      "caption": "10月31日まで、かぼちゃのスコーンをご用意しています。\n\n毎朝お店で焼いている、かぼちゃのスコーン（税込380円）。秋の味覚を少しだけ楽しみたいときにぴったりのサイズ感です。\n\n吉祥寺駅から歩いて5分。近くで働いている方も、お散歩の途中の方も、ぜひ気軽にお立ち寄りください。\n\nお仕事終わりや、午後の休憩時間にぜひお待ちしています。ご予約は【要確認】まで。",
       "hashtags": [
-        "こもれびカフェ",
-        "期間限定",
-        "かぼちゃスイーツ",
-        "秋カフェ",
-        "スコーン"
+        "吉祥寺カフェ",
+        "かぼちゃスコーン",
+        "吉祥寺休憩",
+        "焼き菓子",
+        "期間限定"
       ],
-      "reelIdea": "かぼちゃのスコーンを半分に割って、中身を見せるショート動画。",
-      "imageScene": "A clean, studio-like shot of a single pumpkin scone placed on a textured ceramic surface. The lighting is soft and directional, highlighting the natural texture and color of the pumpkin ingredients. The composition is simple and focuses on the food itself.",
+      "altText": "コーヒーカップとかぼちゃのスコーンが並んでいる様子。",
+      "reelIdea": "店頭のショーケースにかぼちゃスコーンが並ぶ様子を映す動画。",
+      "imageScene": "A bright, clear shot of several pumpkin scones arranged neatly on a wooden tray. The lighting is natural and crisp, highlighting the golden-brown color and the texture of the scones. The background is a soft-focus interior of a cafe, with subtle details like wooden textures and soft lighting that evoke a welcoming environment. The arrangement is clean and spacious, allowing for text overlays in the middle of the frame. There are no people, logos, or price tags visible in the shot.",
       "checkItems": [
-        "営業時間と定休日の情報を【要確認】に入れ替えてください"
+        "ご予約が必要な場合、その連絡先を【要確認】から正確な情報に書き換えてください"
       ],
       "date": "2026-10-26",
       "label": "10/26(月)",
       "goal": "visit",
+      "keywords": [
+        "吉祥寺 休憩"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "カフェでの癒やし",
-      "headline": "忙しい日常を忘れるカフェ時間",
-      "caption": "ふと深呼吸したくなること、ありませんか？\n\nこだわりのコーヒー豆を店内で焙煎し、淹れたての香りで店内を満たしています。\n\n「こもれびカフェ」で過ごす時間は、誰にとっても穏やかなものであってほしいと思っています。\n\n明日からまた頑張ろうと思える、そんな場所を探している友だちにぜひ送ってみてください。",
+      "theme": "お店の裏側",
+      "headline": "ホッとひと息つきたいあなたへ",
+      "caption": "忙しい毎日のなかで、コーヒーを飲んでふぅっと息をつく瞬間。\n\n吉祥寺の片隅にある当店は、そんな何気ない時間を大切にする方のために開いています。\n\n店内で自家焙煎したコーヒーの香りと、焼き上がったばかりの焼き菓子の香り。それだけで、少しだけ気持ちが軽くなるかもしれません。\n\n今日は誰とどこで休憩しますか？「疲れているあの友だち」を誘って、ぜひメッセージで送ってみてください。",
       "hashtags": [
-        "こもれびカフェ",
-        "カフェ時間",
-        "深呼吸",
-        "癒やしの時間",
-        "自家焙煎"
+        "吉祥寺カフェ",
+        "自家焙煎コーヒー",
+        "焼き菓子",
+        "カフェタイム",
+        "吉祥寺休憩"
       ],
-      "reelIdea": "店内の落ち着いた様子をゆっくりとパン（カメラ移動）で撮影した映像。",
-      "imageScene": "A serene, wide shot of an empty table inside the cafe with a soft glow from a nearby lamp. The atmosphere is calm and inviting, with gentle textures of wood and fabric. The focus is on the peaceful environment of the cafe.",
+      "altText": "湯気が立つコーヒーカップが置かれた、落ち着いた雰囲気のテーブル。",
+      "reelIdea": "コーヒー豆を挽く音と、ハンドドリップでお湯を注ぐ音だけのASMR風動画。",
+      "imageScene": "A close-up shot of a steaming cup of coffee placed on a rustic wooden table, with soft, diffused sunlight filtering through a window, creating a serene and calm mood. The focus is on the steam rising from the cup, which adds a sense of warmth and vitality to the scene. The color scheme is dominated by deep browns and warm ambers. The background is softly blurred, showing a hint of a comfortable cafe environment, leaving ample space for text in the upper or lower parts of the frame.",
       "checkItems": [
-        "店内の雰囲気が写真と乖離していないか確認してください"
+        "営業時間の変更がないか確認してください"
       ],
       "date": "2026-10-27",
       "label": "10/27(火)",
       "goal": "share",
+      "keywords": [
+        "焼き菓子",
+        "吉祥寺 休憩"
+      ],
       "riskyWords": []
     },
     {
-      "theme": "カフェの選び方ガイド",
-      "headline": "失敗しないカフェ選びの3つのポイント",
-      "caption": "良いカフェを見つけるためのチェックリスト\n\n心地よいカフェに出会うには、3つのポイントをチェックしてみてください。\n\n1. コーヒーの香りがしっかりしているか\n2. 席の間隔がゆったりしているか\n3. お店の人が丁寧に迎えてくれるか\n\nこもれびカフェも、皆様にとってそんな場所になれるよう大切に営業しています。\n\n自分だけのお気に入りリストを作るために、ぜひ保存しておいてくださいね。",
+      "theme": "こだわり紹介",
+      "headline": "自家焙煎コーヒーができるまで",
+      "caption": "なぜ、店内で焙煎をしているのでしょうか？\n\nそれは、焙煎したての豆で淹れるコーヒーの香りを、一番良い状態で味わっていただきたいからです。\n\n吉祥寺でお店を始めてからずっと、一杯ずつ丁寧に、自家焙煎コーヒーを淹れ続けています。焼き菓子もまた、店内のオーブンで毎朝焼きたてをご用意。\n\n私たちが大切にしている「香り」と「できたて」のこだわりです。\n\n保存して、こもれびカフェのこだわりを忘れないでくださいね。",
       "hashtags": [
-        "こもれびカフェ",
-        "カフェ選び",
-        "カフェ巡り",
-        "コーヒーライフ",
-        "癒やしの空間"
+        "自家焙煎コーヒー",
+        "吉祥寺カフェ",
+        "コーヒー好き",
+        "焼き菓子",
+        "こだわり"
       ],
-      "reelIdea": "手帳にチェックリストを書き込む様子を上から撮影する。",
-      "imageScene": "A close-up of a rustic wooden table with a notebook and a pen, partially visible in the frame. Beside the notebook, a saucer and a cup of coffee add to the relaxed setting. Natural light creates a calm and intellectual vibe.",
+      "altText": "焙煎されたコーヒー豆が置かれている様子。",
+      "reelIdea": "焙煎機が動いている様子や、豆を選別している様子のダイジェスト動画。",
+      "imageScene": "A high-quality, detailed shot of roasted coffee beans spread out on a flat, natural surface. The lighting is soft, emphasizing the rich, dark, and oily textures of the beans. The depth of field is shallow, keeping a small section of the beans in sharp focus while letting the rest fade into a soft, textured background. The overall composition is simple and minimalist, with a neutral color palette that conveys an artisanal and authentic cafe atmosphere, suitable for brand storytelling.",
       "checkItems": [
-        "お店の接客スタイルと記事の内容が合致しているか確認してください"
+        "焙煎に関する事実に間違いがないか確認してください"
       ],
       "date": "2026-10-28",
       "label": "10/28(水)",
       "goal": "save",
+      "keywords": [
+        "吉祥寺 カフェ",
+        "自家焙煎コーヒー",
+        "焼き菓子"
+      ],
       "riskyWords": []
     }
   ]

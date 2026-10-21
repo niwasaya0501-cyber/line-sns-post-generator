@@ -60,6 +60,16 @@ export function PlanView({ plan, images, cardBase }: Props) {
         )}
       </section>
 
+      {plan.searchKeywords && plan.searchKeywords.length > 0 && (
+        <SearchSection
+          keywords={plan.searchKeywords}
+          profileName={plan.profileName}
+          hasArea={Boolean(plan.input.area)}
+          onCopied={() => setToast("名前欄の例をコピーしました")}
+          onCopyFailed={() => setToast("コピーできませんでした。長押しで選択してください")}
+        />
+      )}
+
       <div role="note" className="mt-4 rounded-xl border border-warn/30 bg-warn-soft px-4 py-3 text-warn">
         <p className="font-bold">
           <span aria-hidden>👀 </span>投稿前に、必ず人の目でご確認ください
@@ -166,7 +176,7 @@ function PostCard({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={cardSrc}
-            alt={post.headline}
+            alt={post.altText ? `${post.headline}。${post.altText}` : post.headline}
             onError={() => setBroken(true)}
             className="absolute inset-0 size-full object-cover"
           />
@@ -178,6 +188,20 @@ function PostCard({
           <Caption text={post.caption} />
         </p>
         <p className="text-brand">{hashtags}</p>
+
+        {post.keywords && post.keywords.length > 0 && (
+          <p className="text-sm text-muted">
+            <span aria-hidden>🔍 </span>本文に入っている検索ワード：{post.keywords.join("、")}
+          </p>
+        )}
+        {post.altText && (
+          <details className="text-sm">
+            <summary className="flex min-h-11 cursor-pointer items-center font-bold text-brand">
+              画像の代替テキスト（Instagramの「詳細設定」に貼る）
+            </summary>
+            <p className="pb-1">{post.altText}</p>
+          </details>
+        )}
 
         {post.reelIdea && (
           <div className="rounded-xl bg-brand-soft px-4 py-3">
@@ -223,6 +247,66 @@ function PostCard({
         )}
       </div>
     </article>
+  );
+}
+
+// お客様が検索しそうな言葉と、名前欄の例。実際の検索回数ではなくAIの推定である点を明記する
+function SearchSection({
+  keywords,
+  profileName,
+  hasArea,
+  onCopied,
+  onCopyFailed,
+}: {
+  keywords: string[];
+  profileName?: string;
+  hasArea: boolean;
+  onCopied: () => void;
+  onCopyFailed: () => void;
+}) {
+  async function copy() {
+    if (!profileName) return;
+    try {
+      await navigator.clipboard.writeText(profileName);
+      onCopied();
+    } catch {
+      onCopyFailed();
+    }
+  }
+
+  return (
+    <section className="card mt-4 p-4">
+      <p className="font-bold">
+        <span aria-hidden>🔍 </span>お客様が検索しそうな言葉
+      </p>
+      <p className="mt-1 text-sm text-muted">
+        Instagramの検索は、名前欄や本文の言葉をもとに結果を出すとされます。各投稿の本文に、この言葉を自然に入れています（AIの推定で、実際の検索回数のデータではありません）。
+      </p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {keywords.map((k) => (
+          <li key={k} className="rounded-full bg-brand-soft px-3 py-1 text-sm text-brand">
+            {k}
+          </li>
+        ))}
+      </ul>
+      {!hasArea && (
+        <p className="mt-3 text-sm text-muted">
+          <span aria-hidden>💡 </span>
+          「もっと詳しく書く」でエリア（駅名・地域名）を入れると、「地名＋業種」のような、近くのお客様が実際に使う言葉も提案できます。
+        </p>
+      )}
+      {profileName && (
+        <div className="mt-4 border-t border-line pt-3">
+          <p className="text-sm font-bold">プロフィールの「名前」欄の例</p>
+          <p className="mt-1 break-all">
+            <Caption text={profileName} />
+          </p>
+          <button type="button" onClick={copy} className="btn-outline mt-2 w-full">
+            <span aria-hidden>📋</span> 名前欄の例をコピー
+          </button>
+        </div>
+      )}
+    </section>
   );
 }
 

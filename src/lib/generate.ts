@@ -1,5 +1,5 @@
 import { generateImage, generateText, Output } from "ai";
-import { assignGoals, normalizeHashtags } from "./buzz";
+import { assignGoals, findKeywordsInText, normalizeHashtags } from "./buzz";
 import { IMAGE_MODELS, LOW_THINKING, TEXT_MODELS } from "./ai";
 import { findRiskyExpressions } from "./compliance";
 import type { PlanInput } from "./input";
@@ -63,6 +63,8 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
     createdAt: new Date().toISOString(),
     input,
     overview: output.overview,
+    searchKeywords: output.searchKeywords,
+    profileName: output.profileName,
     posts: slots.map((slot, i) => {
       const post = output.posts[i];
       const caption = stripHashtagLines(post.caption);
@@ -71,6 +73,7 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
         ...post,
         ...slot,
         goal: goals[i],
+        keywords: findKeywordsInText(caption, output.searchKeywords),
         caption,
         hashtags,
         riskyWords: findRiskyExpressions(

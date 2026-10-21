@@ -22,7 +22,8 @@ export default function SamplePage() {
       </Link>
       <div className="mt-6">
         <PlanView
-          plan={samplePlan as Plan}
+          // JSONの読み込みでは任意項目の型が広がるため、作ったときの形（Plan）として扱う
+          plan={samplePlan as unknown as Plan}
           images={sampleFinal.images as ImageState[]}
           cardBase="/sample"
         />

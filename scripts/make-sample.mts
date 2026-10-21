@@ -13,6 +13,7 @@ const OUT = "public/sample";
 const input = planInputSchema.parse({
   industry: "food",
   shopName: "こもれびカフェ",
+  area: "吉祥寺",
   concept: "駅から歩いて5分、自家焙煎コーヒーと焼き菓子の小さなカフェ",
   frequency: "daily",
   event: "10月31日まで、かぼちゃのスコーン（税込380円）を期間限定で販売",

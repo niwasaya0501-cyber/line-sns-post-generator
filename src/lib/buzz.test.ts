@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { assignGoals, MAX_HASHTAGS, normalizeHashtags } from "./buzz";
+import { assignGoals, findKeywordsInText, MAX_HASHTAGS, normalizeHashtags } from "./buzz";
 import { findRiskyExpressions } from "./compliance";
 
 describe("assignGoals", () => {
@@ -41,5 +41,24 @@ describe("findRiskyExpressions（いいね・フォローのお願い）", () =>
       "いいねして",
       "全員に",
     ]);
+  });
+});
+
+describe("findKeywordsInText", () => {
+  const keywords = ["吉祥寺 カフェ", "自家焙煎コーヒー", "スコーン テイクアウト"];
+
+  it("空白で区切った検索ワードは、すべての語が本文にあれば含まれているとみなす", () => {
+    expect(findKeywordsInText("吉祥寺駅から5分のカフェです。自家焙煎コーヒーをどうぞ", keywords)).toEqual([
+      "吉祥寺 カフェ",
+      "自家焙煎コーヒー",
+    ]);
+  });
+
+  it("一部の語しか無ければ含めない", () => {
+    expect(findKeywordsInText("スコーンが焼けました", keywords)).toEqual([]);
+  });
+
+  it("全角の空白や、英字の大文字・小文字の違いも同じとみなす", () => {
+    expect(findKeywordsInText("Cafe で ランチ", ["cafe　ランチ"])).toEqual(["cafe　ランチ"]);
   });
 });

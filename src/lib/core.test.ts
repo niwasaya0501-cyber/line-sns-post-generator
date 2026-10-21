@@ -27,6 +27,11 @@ describe("planInputSchema", () => {
     expect(r.frequency).toBe("daily");
   });
 
+  it("エリアは任意で、前後の空白を取り除く", () => {
+    expect(planInputSchema.parse({ industry: "food", concept: "カフェ", area: " 吉祥寺駅 " }).area).toBe("吉祥寺駅");
+    expect(planInputSchema.parse({ industry: "food", concept: "カフェ", area: "" }).area).toBeUndefined();
+  });
+
   it("一言が空だと通らない", () => {
     expect(planInputSchema.safeParse({ industry: "hair", concept: "  " }).success).toBe(false);
   });

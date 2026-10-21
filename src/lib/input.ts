@@ -38,6 +38,8 @@ export const planInputSchema = z.object({
     .min(1, "お店・事業の一言を入力してください")
     .max(200, "200文字以内で入力してください"),
   shopName: optionalText(30),
+  // 「地名＋業種」で探されることが多いため、検索ワードに使う（入力が無ければ地名は使わない）
+  area: optionalText(30),
   frequency: z
     .enum(Object.keys(FREQUENCIES) as [Frequency, ...Frequency[]])
     .default("daily"),
