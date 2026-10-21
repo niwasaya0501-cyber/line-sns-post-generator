@@ -22,6 +22,14 @@ export const FREQUENCIES = {
 
 export type Frequency = keyof typeof FREQUENCIES;
 
+// 画像の用意のしかた。own（自分の写真）は、写真を端末の中だけで合成し、サーバーには送らない
+export const IMAGE_MODES = {
+  ai: { label: "AIに作ってもらう", emoji: "✨", note: "表紙の写真をAIが作ります（1分ほど）" },
+  own: { label: "自分の写真を使う", emoji: "📷", note: "完成後に写真を選ぶと、文字を重ねます。写真は送信されません" },
+} as const;
+
+export type ImageMode = keyof typeof IMAGE_MODES;
+
 const optionalText = (max: number) =>
   z
     .string()
@@ -43,6 +51,7 @@ export const planInputSchema = z.object({
   frequency: z
     .enum(Object.keys(FREQUENCIES) as [Frequency, ...Frequency[]])
     .default("daily"),
+  imageMode: z.enum(Object.keys(IMAGE_MODES) as [ImageMode, ...ImageMode[]]).default("ai"),
   event: optionalText(300),
   strengths: optionalText(300),
   target: optionalText(200),

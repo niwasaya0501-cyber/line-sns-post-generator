@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { assignGoals, findKeywordsInText, MAX_HASHTAGS, normalizeHashtags } from "./buzz";
+import {
+  assignGoals,
+  findKeywordsInText,
+  fitSlides,
+  MAX_HASHTAGS,
+  MAX_SLIDES,
+  normalizeHashtags,
+  SLIDE_RANGE,
+} from "./buzz";
 import { findRiskyExpressions } from "./compliance";
 
 describe("assignGoals", () => {
@@ -60,5 +68,27 @@ describe("findKeywordsInText", () => {
 
   it("全角の空白や、英字の大文字・小文字の違いも同じとみなす", () => {
     expect(findKeywordsInText("Cafe で ランチ", ["cafe　ランチ"])).toEqual(["cafe　ランチ"]);
+  });
+});
+
+describe("SLIDE_RANGE / fitSlides", () => {
+  it("狙いごとの枚数の目安（表紙を含む）は、自動投稿APIの上限10枚以内", () => {
+    for (const g of ["save", "share", "comment", "visit"] as const) {
+      const [min, max] = SLIDE_RANGE[g];
+      expect(min).toBeGreaterThanOrEqual(2);
+      expect(max).toBeLessThanOrEqual(MAX_SLIDES);
+    }
+    expect(MAX_SLIDES).toBe(10);
+  });
+
+  it("AIが多く作りすぎたら、表紙を含めて上限の枚数に切り詰める（最後のまとめは残す）", () => {
+    const inner = Array.from({ length: 12 }, (_, i) => ({ n: i }));
+    const fitted = fitSlides(inner);
+    expect(fitted).toHaveLength(MAX_SLIDES - 1);
+    expect(fitted.at(-1)).toEqual({ n: 11 });
+  });
+
+  it("上限以内ならそのまま", () => {
+    expect(fitSlides([{ n: 1 }, { n: 2 }])).toEqual([{ n: 1 }, { n: 2 }]);
   });
 });

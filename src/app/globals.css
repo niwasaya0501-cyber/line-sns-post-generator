@@ -61,3 +61,11 @@ body {
   background-size: 200% 100%;
   animation: shimmer 1.6s infinite;
 }
+
+/* 横スワイプの画像一覧で、スクロールバーを出さない */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

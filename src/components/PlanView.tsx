@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { GOALS, type Goal } from "@/lib/buzz";
-import { INDUSTRIES } from "@/lib/input";
+import { INDUSTRIES, type ImageMode } from "@/lib/input";
 import { cardFile } from "@/lib/paths";
 import type { ImageState, Plan, Post } from "@/lib/plan";
 import { NEEDS_CHECK } from "@/lib/prompt";
+import { SlideDeck } from "./SlideDeck";
 
 type Props = {
   plan: Plan;
@@ -19,7 +20,10 @@ export function PlanView({ plan, images, cardBase }: Props) {
   const industry = INDUSTRIES[plan.input.industry];
   const readyCount = images.filter((s) => s !== "pending").length;
   const goalCounts = (Object.keys(GOALS) as Goal[])
-    .map((g) => ({ goal: g, count: plan.posts.filter((p) => p.goal === g).length }))
+    .map((g) => ({
+      goal: g,
+      count: plan.posts.filter((p) => p.goal === g).length,
+    }))
     .filter((c) => c.count > 0);
 
   useEffect(() => {
@@ -74,9 +78,7 @@ export function PlanView({ plan, images, cardBase }: Props) {
         <p className="font-bold">
           <span aria-hidden>👀 </span>投稿前に、必ず人の目でご確認ください
         </p>
-        <p className="mt-1 text-sm">
-          AIの下書きです。「⚠ 要確認」の箇所は、正しい情報に書き換えてからお使いください。
-        </p>
+        <p className="mt-1 text-sm">AIの下書きです。「⚠ 要確認」の箇所は、正しい情報に書き換えてからお使いください。</p>
       </div>
 
       <ol className="mt-6 space-y-8">
@@ -87,6 +89,9 @@ export function PlanView({ plan, images, cardBase }: Props) {
               imageState={images[i]}
               cardSrc={`${cardBase}/${cardFile(i)}`}
               industryColors={industry.colors}
+              imageMode={plan.input.imageMode ?? "ai"}
+              shopName={plan.input.shopName}
+              onToast={setToast}
               onCopied={() => setToast("投稿文をコピーしました")}
               onCopyFailed={() => setToast("コピーできませんでした。長押しで選択してください")}
             />
@@ -114,6 +119,9 @@ function PostCard({
   imageState,
   cardSrc,
   industryColors,
+  imageMode,
+  shopName,
+  onToast,
   onCopied,
   onCopyFailed,
 }: {
@@ -121,6 +129,9 @@ function PostCard({
   imageState: ImageState;
   cardSrc: string;
   industryColors: readonly [string, string];
+  imageMode: ImageMode;
+  shopName?: string;
+  onToast: (message: string) => void;
   onCopied: () => void;
   onCopyFailed: () => void;
 }) {
@@ -151,37 +162,61 @@ function PostCard({
           <p className="mt-1 text-sm text-muted">{GOALS[post.goal].why}</p>
         </div>
       )}
+      {post.slides && post.slides.length > 0 && (
+        <p className="px-4 pb-3 text-sm">
+          <span className="font-bold">
+            <span aria-hidden>🧩 </span>全{post.slides.length + 1}枚構成
+          </span>
+          {post.slideReason && <span className="text-muted">：{post.slideReason}</span>}
+        </p>
+      )}
 
-      <div className="relative aspect-[4/5] w-full">
-        {imageState === "pending" || imageState === "missing" ? (
-          <div
-            className="absolute inset-0 flex flex-col justify-end p-6"
-            style={{ background: `linear-gradient(160deg, ${industryColors[0]}, ${industryColors[1]})` }}
-          >
-            {imageState === "pending" && <div className="shimmer absolute inset-0" />}
-            <p className="relative flex items-center gap-2 text-sm text-white/90">
-              {imageState === "pending" ? (
-                <>
-                  <span aria-hidden className="inline-block size-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  画像を作成中…
-                </>
-              ) : (
-                "画像を用意できませんでした"
-              )}
-            </p>
-            <p className="relative mt-2 text-2xl font-bold text-white">{post.headline}</p>
-          </div>
-        ) : (
-          // 文字を重ねた完成カード（サーバーで合成）。LINE・Instagramにそのまま使える
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={cardSrc}
-            alt={post.altText ? `${post.headline}。${post.altText}` : post.headline}
-            onError={() => setBroken(true)}
-            className="absolute inset-0 size-full object-cover"
-          />
-        )}
-      </div>
+      {post.slides && post.slides.length > 0 ? (
+        <SlideDeck
+          post={{ ...post, slides: post.slides }}
+          imageMode={imageMode}
+          imageState={imageState}
+          coverSrc={cardSrc}
+          style={{ colors: industryColors, shopName }}
+          onToast={onToast}
+        />
+      ) : (
+        <div className="relative aspect-[4/5] w-full">
+          {imageState === "pending" || imageState === "missing" ? (
+            <div
+              className="absolute inset-0 flex flex-col justify-end p-6"
+              style={{
+                background: `linear-gradient(160deg, ${industryColors[0]}, ${industryColors[1]})`,
+              }}
+            >
+              {imageState === "pending" && <div className="shimmer absolute inset-0" />}
+              <p className="relative flex items-center gap-2 text-sm text-white/90">
+                {imageState === "pending" ? (
+                  <>
+                    <span
+                      aria-hidden
+                      className="inline-block size-3 animate-spin rounded-full border-2 border-white border-t-transparent"
+                    />
+                    画像を作成中…
+                  </>
+                ) : (
+                  "画像を用意できませんでした"
+                )}
+              </p>
+              <p className="relative mt-2 text-2xl font-bold text-white">{post.headline}</p>
+            </div>
+          ) : (
+            // 文字を重ねた完成カード（サーバーで合成）。LINE・Instagramにそのまま使える
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cardSrc}
+              alt={post.altText ? `${post.headline}。${post.altText}` : post.headline}
+              onError={() => setBroken(true)}
+              className="absolute inset-0 size-full object-cover"
+            />
+          )}
+        </div>
+      )}
 
       <div className="space-y-4 p-4">
         <p className="whitespace-pre-wrap">
@@ -191,7 +226,8 @@ function PostCard({
 
         {post.keywords && post.keywords.length > 0 && (
           <p className="text-sm text-muted">
-            <span aria-hidden>🔍 </span>本文に入っている検索ワード：{post.keywords.join("、")}
+            <span aria-hidden>🔍 </span>本文に入っている検索ワード：
+            {post.keywords.join("、")}
           </p>
         )}
         {post.altText && (
@@ -222,26 +258,35 @@ function PostCard({
                 <li key={item}>{item}</li>
               ))}
               {post.riskyWords.map((w) => (
-                <li key={w}>「{w}」は誇大な表現や、事実と異なる内容になっていないか確認してください</li>
+                <li key={w}>
+                  「{w}
+                  」は誇大な表現や、事実と異なる内容になっていないか確認してください
+                </li>
               ))}
             </ul>
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-2">
-          <button type="button" onClick={copy} className="btn-primary">
+        {post.slides && post.slides.length > 0 ? (
+          <button type="button" onClick={copy} className="btn-primary w-full">
             <span aria-hidden>📋</span> 文章コピー
           </button>
-          {imageState === "pending" || imageState === "missing" ? (
-            <button type="button" disabled className="btn-outline">
-              {imageState === "pending" ? "画像を作成中…" : "画像なし"}
+        ) : (
+          <div className="grid grid-cols-2 gap-2">
+            <button type="button" onClick={copy} className="btn-primary">
+              <span aria-hidden>📋</span> 文章コピー
             </button>
-          ) : (
-            <a href={cardSrc} target="_blank" rel="noopener" className="btn-outline">
-              <span aria-hidden>🖼</span> 画像を開く
-            </a>
-          )}
-        </div>
+            {imageState === "pending" || imageState === "missing" ? (
+              <button type="button" disabled className="btn-outline">
+                {imageState === "pending" ? "画像を作成中…" : "画像なし"}
+              </button>
+            ) : (
+              <a href={cardSrc} target="_blank" rel="noopener" className="btn-outline">
+                <span aria-hidden>🖼</span> 画像を開く
+              </a>
+            )}
+          </div>
+        )}
         {imageState === "fallback" && (
           <p className="text-sm text-muted">※ 写真の作成がうまくいかなかったため、色の背景で代わりに作っています。</p>
         )}
@@ -331,9 +376,7 @@ function Caption({ text }: { text: string }) {
         <span key={i}>
           {part}
           {i < parts.length - 1 && (
-            <mark className="mx-0.5 rounded bg-warn-soft px-1 font-bold text-warn ring-1 ring-warn/40">
-              ⚠ 要確認
-            </mark>
+            <mark className="mx-0.5 rounded bg-warn-soft px-1 font-bold text-warn ring-1 ring-warn/40">⚠ 要確認</mark>
           )}
         </span>
       ))}
@@ -350,7 +393,11 @@ function PhaseThree() {
       <ol className="mt-3 flex items-center gap-1 text-sm">
         {["AIが下書き", "あなたが確認・承認", "予約投稿"].map((step, i) => (
           <li key={step} className="flex items-center gap-1">
-            {i > 0 && <span aria-hidden className="text-muted">→</span>}
+            {i > 0 && (
+              <span aria-hidden className="text-muted">
+                →
+              </span>
+            )}
             <span className="rounded-full bg-brand-soft px-3 py-1 text-brand">{step}</span>
           </li>
         ))}

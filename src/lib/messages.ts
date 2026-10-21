@@ -98,7 +98,13 @@ export function buildPlanCarousel(plan: Plan, images: ImageState[]): messagingAp
       layout: "vertical",
       spacing: "sm",
       contents: [
-        { type: "text", text: `${post.label}　${post.theme}`, size: "xxs", color: MUTED, wrap: true },
+        {
+          type: "text",
+          text: `${post.label}　${post.theme}${post.slides ? `（全${post.slides.length + 1}枚）` : ""}`,
+          size: "xxs",
+          color: MUTED,
+          wrap: true,
+        },
         ...(post.goal
           ? [
               {
@@ -134,7 +140,9 @@ export function buildPlanCarousel(plan: Plan, images: ImageState[]): messagingAp
   return [
     {
       type: "text",
-      text: `${industry.emoji} 1週間分の投稿案ができました！\n\n${plan.overview}\n\n※投稿前に、内容（特に【要確認】の箇所）を必ずご確認ください。`,
+      text: `${industry.emoji} 1週間分の投稿案ができました！\n\n${plan.overview}\n\n${
+        plan.input.imageMode === "own" ? "📷 「全文・コピー」から、ご自分の写真を選んで仕上げてください。\n\n" : ""
+      }※投稿前に、内容（特に【要確認】の箇所）を必ずご確認ください。`,
     },
     { type: "flex", altText: "1週間分の投稿案ができました", contents: { type: "carousel", contents: bubbles } },
   ];

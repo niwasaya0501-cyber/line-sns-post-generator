@@ -37,6 +37,18 @@ export async function runPlan(
     return;
   }
 
+  // 自分の写真を使う場合は、画像を作らない（写真は結果画面で、端末の中だけで合成する）
+  if (input.imageMode === "own") {
+    const images: ImageState[] = plan.posts.map(() => "missing");
+    await saveFinal(id, images).catch((err) =>
+      console.error("[plan] 完了の保存に失敗", id, err instanceof Error ? err.message : err),
+    );
+    console.info("[plan] 完了（自分の写真）", id, elapsed());
+    emit({ type: "done" });
+    if (lineUserId) await notify(lineUserId, buildPlanCarousel(plan, images));
+    return;
+  }
+
   const images: ImageState[] = plan.posts.map(() => "pending");
   const deadline = Date.now() + IMAGE_DEADLINE_MS;
   await mapWithConcurrency(plan.posts, IMAGE_CONCURRENCY, async (post, i) => {

@@ -3,6 +3,15 @@ import type { Goal } from "./buzz";
 import type { PlanInput } from "./input";
 import type { ScheduleSlot } from "./schedule";
 
+// 表紙の後ろに続くスライド（2枚目以降）
+export const slideSchema = z.object({
+  title: z.string().describe("スライドの見出し。全角16文字以内"),
+  body: z.string().describe("スライドの本文。全角80文字以内。箇条書きは「・」と改行で"),
+  photoGuide: z.string().describe("自分で写真を撮る場合に、このスライドに合う写真。日本語1文"),
+});
+
+export type Slide = z.infer<typeof slideSchema>;
+
 // AIに返させる形（日付は含めない。アプリ側で計算した日付と順番で対応させる）
 export const aiPostSchema = z.object({
   theme: z.string().describe("その日の投稿のテーマ（例: スタッフ紹介、季節のおすすめ）"),
@@ -19,7 +28,14 @@ export const aiPostSchema = z.object({
     .string()
     .describe("写真の撮影指示（英語1段落、60〜120語）。人物の顔のアップ・文字・ロゴ・看板は含めない"),
   checkItems: z.array(z.string()).describe("投稿前にお店の人が確認すべき点（入力に無い事実を補った箇所など）"),
+  coverPhotoGuide: z.string().describe("自分で写真を撮る場合に、表紙に合う写真。日本語1文"),
+  slides: z.array(slideSchema).describe("表紙の後ろに続くスライド。最後は行動を促すまとめ"),
+  slideReason: z.string().describe("この枚数にした理由。日本語1文。枚数の数字は書かない"),
 });
+
+type AiPost = z.infer<typeof aiPostSchema>;
+// 機能を足す前に作った投稿案には無い項目
+type AddedLater = "reelIdea" | "altText" | "coverPhotoGuide" | "slides" | "slideReason";
 
 export const aiPlanSchema = z.object({
   overview: z.string().describe("この1週間の投稿方針を2〜3文で"),
@@ -31,10 +47,8 @@ export const aiPlanSchema = z.object({
 });
 
 // reelIdea・altText・goal・keywords は、機能を足す前に作った投稿案には無い
-export type Post = Omit<z.infer<typeof aiPostSchema>, "reelIdea" | "altText"> & {
-  reelIdea?: string;
-  altText?: string;
-} &
+export type Post = Omit<AiPost, AddedLater> &
+  Partial<Pick<AiPost, AddedLater>> &
   ScheduleSlot & {
     goal?: Goal;
     // 本文に含まれている検索ワード

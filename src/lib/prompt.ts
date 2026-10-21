@@ -1,5 +1,5 @@
 import { INDUSTRIES, type PlanInput } from "./input";
-import { GOALS, MAX_HASHTAGS, type Goal } from "./buzz";
+import { GOALS, MAX_HASHTAGS, MAX_SLIDES, SLIDE_RANGE, type Goal } from "./buzz";
 import { RISKY_WORDS_FOR_PROMPT } from "./compliance";
 import type { ScheduleSlot } from "./schedule";
 
@@ -13,7 +13,10 @@ function quote(label: string, value: string | undefined): string {
 export function buildPlanPrompt(input: PlanInput, slots: ScheduleSlot[], goals: Goal[]): string {
   const industry = INDUSTRIES[input.industry];
   const days = slots
-    .map((s, i) => `${i + 1}. ${s.label}　狙い: ${GOALS[goals[i]].label}（${goals[i]}）`)
+    .map((s, i) => {
+      const [min, max] = SLIDE_RANGE[goals[i]];
+      return `${i + 1}. ${s.label}　狙い: ${GOALS[goals[i]].label}（${goals[i]}）　slides: ${min - 1}〜${max - 1}枚（表紙を含めて${min}〜${max}枚）`;
+    })
     .join("\n");
   const goalRules = [...new Set(goals)]
     .map((g) => `- ${GOALS[g].label}（${g}）: ${GOALS[g].prompt}`)
@@ -70,10 +73,20 @@ ${goalRules}
 - エリアの入力が無いときは、地名を含めない（地名を作らない）。
 - profileName: 名前欄は検索の対象になるとされるため、「店名｜エリア 業種」の形などで検索ワードを1〜2個入れる。店名の入力が無ければ「【要確認】」にする。
 
+# 複数枚投稿（カルーセル）の構成
+- 1投稿は「表紙（headline を重ねた写真）＋ slides」の複数枚。表紙で興味を引き、スワイプで続きを読ませる。
+- slides の枚数は、上の各投稿に書いた範囲に必ず収める（少なすぎも多すぎもNG）。範囲の中で、内容に必要な分だけにする。
+  1枚に1つのメッセージ。例えば「3つのコツ」なら、まとめ1枚＋コツ1つにつき1枚＋最後の行動の1枚。表紙を含めて${MAX_SLIDES}枚を超えない。
+- slides の1枚目（全体の2枚目）は、表紙を見ずにこの1枚から見ても内容が分かるようにする（2枚目から表示されることがあるため）。
+- slides の最後は、狙いに合った行動を促すまとめにする（保存・送る・コメント・来店）。
+- slides の文章も「守ること」に従う。入力に無い事実は【要確認】。
+- slideReason には、この枚数にした理由を1文で書く。枚数の数字は書かない（例:「3つのコツを1枚ずつ見せ、最後に保存を促す構成にしました」）。
+
 # 各項目
 - headline: 画像に重ねる短い見出し。全角14文字以内。
 - caption: 投稿文。1行目がフック。改行で読みやすくし、最後は狙いに合った一言で終える。ハッシュタグは caption に入れない（hashtags に分ける）。
 - hashtags: ${MAX_HASHTAGS}個まで（Instagramの上限）。数を増やすより、内容に合う具体的なタグを選ぶ（業種・商品・特徴）。地域名は入力に無ければ使わない。
+- coverPhotoGuide / photoGuide: お店の人が自分のスマホで撮れる、具体的な写真（例:「かぼちゃのスコーンを半分に割って、断面を真上から」）。
 - altText: 画像に写っているものを、日本語の1文で具体的に（例:「木のテーブルに置かれた、かぼちゃのスコーンとカフェラテ」）。
 - reelIdea: 同じテーマを15秒ほどのリール（縦長動画）にするなら、何をどう撮るか。スマホで1人で撮れる内容にする。
 - imageScene: その投稿に合う写真の撮影指示を英語で。被写体・構図・光・色の雰囲気を文章で描写する。

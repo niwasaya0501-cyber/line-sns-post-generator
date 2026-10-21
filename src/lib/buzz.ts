@@ -39,6 +39,26 @@ export const GOALS = {
 
 export type Goal = keyof typeof GOALS;
 
+// 複数枚投稿（カルーセル）の枚数の目安（表紙を含む）。
+// 「1枚に1つのメッセージ」で、内容に必要な分だけにする。お役立ち情報は枚数を多めに、
+// 質問や共感の投稿は短めにして、最後まで見てもらいやすくする
+export const SLIDE_RANGE: Record<Goal, readonly [number, number]> = {
+  save: [5, 8],
+  share: [3, 5],
+  comment: [2, 4],
+  visit: [3, 5],
+};
+
+// Instagramは手動なら20枚まで載せられるが、将来の自動投稿（公式API）は10枚までのため、10枚に合わせる
+export const MAX_SLIDES = 10;
+
+// 表紙の後ろに続くスライドを上限に収める。最後のスライドは行動を促すまとめなので、残す
+export function fitSlides<T>(inner: T[]): T[] {
+  const max = MAX_SLIDES - 1;
+  if (inner.length <= max) return inner;
+  return [...inner.slice(0, max - 1), inner[inner.length - 1]];
+}
+
 // 投稿数ごとの組み合わせ。保存をいちばん多くし、来店の案内は多くても2回までにする
 const GOAL_PATTERNS: Record<number, Goal[]> = {
   2: ["save", "visit"],

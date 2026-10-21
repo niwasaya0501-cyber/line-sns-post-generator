@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { FREQUENCIES, INDUSTRIES, type Frequency, type Industry } from "@/lib/input";
+import {
+  FREQUENCIES,
+  IMAGE_MODES,
+  INDUSTRIES,
+  type Frequency,
+  type ImageMode,
+  type Industry,
+} from "@/lib/input";
 import { Spinner } from "@/components/Spinner";
 import { LivePlan } from "./LivePlan";
 
@@ -23,6 +30,7 @@ export default function NewPlanPage() {
 
   const [industry, setIndustry] = useState<Industry | null>(null);
   const [concept, setConcept] = useState("");
+  const [imageMode, setImageMode] = useState<ImageMode>("ai");
   const [showDetails, setShowDetails] = useState(false);
   const [shopName, setShopName] = useState("");
   const [area, setArea] = useState("");
@@ -66,7 +74,7 @@ export default function NewPlanPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           idToken,
-          input: { industry, concept, shopName, area, frequency, event, strengths, target },
+          input: { industry, concept, imageMode, shopName, area, frequency, event, strengths, target },
         }),
       });
       if (!res.ok) {
@@ -145,6 +153,34 @@ export default function NewPlanPage() {
             className="field mt-2 resize-none"
           />
         </label>
+
+        <fieldset>
+          <legend className="font-bold">画像</legend>
+          <p className="text-sm text-muted">1投稿は、表紙＋説明の数枚でできた「複数枚投稿」になります</p>
+          <div className="mt-3 grid gap-2">
+            {(Object.keys(IMAGE_MODES) as ImageMode[]).map((key) => {
+              const selected = imageMode === key;
+              return (
+                <button
+                  type="button"
+                  key={key}
+                  onClick={() => setImageMode(key)}
+                  aria-pressed={selected}
+                  className={`flex min-h-14 flex-col justify-center rounded-xl border px-3 py-2 text-left transition ${
+                    selected ? "border-brand bg-brand-soft text-brand ring-2 ring-brand" : "border-line bg-surface"
+                  }`}
+                >
+                  <span className="font-bold">
+                    <span aria-hidden>{IMAGE_MODES[key].emoji} </span>
+                    {IMAGE_MODES[key].label}
+                    {selected && <span aria-hidden> ✓</span>}
+                  </span>
+                  <span className="mt-0.5 text-sm leading-snug text-muted">{IMAGE_MODES[key].note}</span>
+                </button>
+              );
+            })}
+          </div>
+        </fieldset>
 
         <div className="card">
           <button

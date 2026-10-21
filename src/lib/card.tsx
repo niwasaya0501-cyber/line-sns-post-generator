@@ -3,17 +3,10 @@ import sharp from "sharp";
 import { CARD_FONT, loadCardFont } from "@/lib/font";
 import { INDUSTRIES } from "@/lib/input";
 import type { Plan } from "@/lib/plan";
+import { HEIGHT, headlineFontSize, WIDTH } from "@/lib/slide-layout";
 
-const WIDTH = 1080;
-const HEIGHT = 1350;
-const TEXT_WIDTH = WIDTH - 72 * 2;
 
-// 日本語は単語の途中でも改行されるため、なるべく1行に収まる大きさにする（長すぎる場合は2行）
-// 半角の英数字・記号は全角の約半分の幅として数える
-export function headlineFontSize(headline: string): number {
-  const ems = [...headline].reduce((sum, ch) => sum + (/[\x20-\x7e]/.test(ch) ? 0.55 : 1), 0);
-  return Math.max(56, Math.min(88, Math.floor(TEXT_WIDTH / ems)));
-}
+
 
 // AIが描いた「文字のない画像」の上に、日付・見出し・店名を正しいフォントで重ねたカード画像(PNG)を作る。
 // 画像が無いとき(生成失敗)は業種色のグラデーションを背景にする。

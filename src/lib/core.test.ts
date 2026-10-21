@@ -3,7 +3,7 @@ import { planInputSchema } from "./input";
 import { buildSchedule } from "./schedule";
 import { findRiskyExpressions } from "./compliance";
 import { stripHashtagLines } from "./text";
-import { headlineFontSize } from "./card";
+import { headlineFontSize } from "./slide-layout";
 
 describe("headlineFontSize", () => {
   it("短い見出しは大きく、長い見出しは小さくなる（下限56）", () => {
@@ -99,5 +99,13 @@ describe("findRiskyExpressions", () => {
 
   it("問題がなければ空", () => {
     expect(findRiskyExpressions("落ち着いた空間でお待ちしています", "hair")).toEqual([]);
+  });
+});
+
+describe("planInputSchema（画像の用意のしかた）", () => {
+  it("指定が無ければAIが作る。自分の写真も選べる", () => {
+    expect(planInputSchema.parse({ industry: "food", concept: "カフェ" }).imageMode).toBe("ai");
+    expect(planInputSchema.parse({ industry: "food", concept: "カフェ", imageMode: "own" }).imageMode).toBe("own");
+    expect(planInputSchema.safeParse({ industry: "food", concept: "カフェ", imageMode: "x" }).success).toBe(false);
   });
 });

@@ -35,7 +35,8 @@ export function LivePlan({ response }: { response: Response }) {
           break;
         case "plan":
           setPlan(event.plan);
-          setImages(event.plan.posts.map(() => "pending"));
+          // 自分の写真を使う場合は、サーバーで画像を作らない
+          setImages(event.plan.posts.map(() => (event.plan.input.imageMode === "own" ? "missing" : "pending")));
           break;
         case "image":
           setImages((prev) => prev.map((s, i) => (i === event.index ? event.state : s)));

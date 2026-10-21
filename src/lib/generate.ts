@@ -1,5 +1,5 @@
 import { generateImage, generateText, Output } from "ai";
-import { assignGoals, findKeywordsInText, normalizeHashtags } from "./buzz";
+import { assignGoals, findKeywordsInText, fitSlides, normalizeHashtags } from "./buzz";
 import { IMAGE_MODELS, LOW_THINKING, TEXT_MODELS } from "./ai";
 import { findRiskyExpressions } from "./compliance";
 import type { PlanInput } from "./input";
@@ -9,7 +9,7 @@ import { buildSchedule } from "./schedule";
 import { stripHashtagLines } from "./text";
 
 // 1回の呼び出しの上限。普段は投稿文10秒・画像10秒ほどなので、これを超えたら混雑とみなして次へ
-const TEXT_TIMEOUT_MS = 30_000;
+const TEXT_TIMEOUT_MS = 45_000;
 const IMAGE_TIMEOUT_MS = 40_000;
 
 // 候補を順に試し、最初に成功した結果を返す（失敗理由はログに残す）。
@@ -73,6 +73,7 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
         ...post,
         ...slot,
         goal: goals[i],
+        slides: fitSlides(post.slides),
         keywords: findKeywordsInText(caption, output.searchKeywords),
         caption,
         hashtags,
