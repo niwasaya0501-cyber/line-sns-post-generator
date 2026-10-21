@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GOALS, type Goal } from "@/lib/buzz";
 import { INDUSTRIES } from "@/lib/input";
 import { cardFile } from "@/lib/paths";
 import type { ImageState, Plan, Post } from "@/lib/plan";
@@ -17,6 +18,9 @@ export function PlanView({ plan, images, cardBase }: Props) {
   const [toast, setToast] = useState<string | null>(null);
   const industry = INDUSTRIES[plan.input.industry];
   const readyCount = images.filter((s) => s !== "pending").length;
+  const goalCounts = (Object.keys(GOALS) as Goal[])
+    .map((g) => ({ goal: g, count: plan.posts.filter((p) => p.goal === g).length }))
+    .filter((c) => c.count > 0);
 
   useEffect(() => {
     if (!toast) return;
@@ -33,6 +37,21 @@ export function PlanView({ plan, images, cardBase }: Props) {
         </p>
         <p className="mt-1 font-bold">「{plan.input.concept}」の1週間</p>
         <p className="mt-2">{plan.overview}</p>
+        {goalCounts.length > 0 && (
+          <div className="mt-3 border-t border-line pt-3">
+            <p className="text-sm font-bold">伸びやすさの工夫</p>
+            <p className="mt-1 text-sm text-muted">
+              Instagramは「いいね」より「保存」と「友だちへの送信」を重く見るとされるため、狙う反応を投稿ごとに変えています。
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {goalCounts.map(({ goal, count }) => (
+                <li key={goal}>
+                  <GoalBadge goal={goal} suffix={`×${count}`} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         {readyCount < images.length && (
           <p className="mt-3 flex items-center gap-2 text-sm text-brand" role="status">
             <span aria-hidden className="inline-block size-2 animate-pulse rounded-full bg-brand" />
@@ -116,6 +135,12 @@ function PostCard({
         <p className="text-lg font-bold">{post.label}</p>
         <p className="text-sm text-muted">{post.theme}</p>
       </header>
+      {post.goal && (
+        <div className="px-4 pb-3">
+          <GoalBadge goal={post.goal} />
+          <p className="mt-1 text-sm text-muted">{GOALS[post.goal].why}</p>
+        </div>
+      )}
 
       <div className="relative aspect-[4/5] w-full">
         {imageState === "pending" || imageState === "missing" ? (
@@ -154,6 +179,15 @@ function PostCard({
         </p>
         <p className="text-brand">{hashtags}</p>
 
+        {post.reelIdea && (
+          <div className="rounded-xl bg-brand-soft px-4 py-3">
+            <p className="text-sm font-bold text-brand">
+              <span aria-hidden>🎬 </span>リール（動画）にするなら
+            </p>
+            <p className="mt-1">{post.reelIdea}</p>
+          </div>
+        )}
+
         {hasWarnings && (
           <div className="rounded-xl bg-warn-soft px-4 py-3 text-warn">
             <p className="font-bold">
@@ -189,6 +223,18 @@ function PostCard({
         )}
       </div>
     </article>
+  );
+}
+
+// 狙う反応を、色だけでなく絵文字と言葉で示す
+function GoalBadge({ goal, suffix }: { goal: Goal; suffix?: string }) {
+  const g = GOALS[goal];
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-surface px-3 py-1 text-sm font-bold text-brand">
+      <span aria-hidden>{g.emoji}</span>
+      狙い：{g.label}
+      {suffix && <span className="font-normal text-muted">{suffix}</span>}
+    </span>
   );
 }
 

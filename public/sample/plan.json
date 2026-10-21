@@ -1,6 +1,6 @@
 {
   "id": "sample",
-  "createdAt": "2026-10-21T06:32:26.619Z",
+  "createdAt": "2026-10-21T06:43:02.460Z",
   "input": {
     "industry": "food",
     "concept": "駅から歩いて5分、自家焙煎コーヒーと焼き菓子の小さなカフェ",
@@ -10,157 +10,153 @@
     "strengths": "スコーンは毎朝お店で焼いています。コーヒー豆は店内で焙煎",
     "target": "近くで働く方、ひと息つきたい方"
   },
-  "overview": "こもれびカフェの強みである自家焙煎コーヒーと朝焼きのスコーンを軸に、季節限定のかぼちゃスコーンを織り交ぜた1週間です。働く方のひと息や、週末のリラックスタイムをイメージした構成で、日常の心地よさを発信します。",
+  "overview": "自家焙煎コーヒーと焼きたてスコーンの魅力を中心に、季節限定メニューやカフェ時間を楽しむヒントを投稿します。お客様の日常のひと息を彩る情報を届け、保存や共有を促す構成にします。",
   "posts": [
     {
-      "theme": "季節のおすすめ",
-      "headline": "10月末までの限定・かぼちゃスコーン",
-      "caption": "秋の味覚、かぼちゃのスコーンが焼きあがっています。\n\n店内で毎日焼いているスコーンは、外はさっくり、中はしっとりとした食感です。かぼちゃの優しい甘みが広がるこの時期だけの特別な味わいを楽しんでみませんか？\n\n10月31日までの期間限定販売です。\n\nほっと一息つきたい時にぜひお立ち寄りください。\n\n保存して後で見返すのもおすすめです。",
+      "theme": "かぼちゃのスコーンの楽しみ方",
+      "headline": "かぼちゃスコーンの美味しい温め方",
+      "caption": "かぼちゃスコーンを家でより美味しく食べるコツ\n\n10月31日までの限定メニュー「かぼちゃのスコーン（税込380円）」を、ご自宅で楽しむ方法をご紹介します。\n\n1. アルミホイルに包む\n2. トースターで2〜3分ほど温める\n3. そのまま1分置く\n\nこれだけで、焼きたての香ばしさが復活しますよ。\n\nぜひ保存して、おうちカフェの参考にしてくださいね。",
       "hashtags": [
         "こもれびカフェ",
-        "カフェタイム",
-        "自家焙煎",
+        "自家焙煎コーヒー",
         "スコーン",
-        "焼き菓子",
-        "季節限定",
         "かぼちゃスイーツ",
-        "カフェ巡り"
+        "おうちカフェ"
       ],
-      "imageScene": "A warm, natural light illuminates a single pumpkin scone placed on a ceramic plate. The background is a soft-focus interior of a wooden cafe table. The top two-thirds features the scone with a dusting of flour, while the bottom third of the frame consists of the neutral, slightly blurred texture of the wooden table to allow for text overlay.",
+      "reelIdea": "スコーンをトースターに入れ、取り出すまでの音をASMR風に撮影する。",
+      "imageScene": "A warm-toned, top-down shot of a single golden-brown pumpkin scone placed on a minimalist ceramic plate. The background is a rustic wooden table with soft, natural light coming from the side. Plenty of empty space at the bottom for text overlay.",
       "checkItems": [
-        "10月31日までの期間限定であることを再確認してください",
-        "スコーンの価格が税込380円であることを再確認してください"
+        "トースターの具体的な加熱時間はあくまで目安であることを考慮してください"
       ],
       "date": "2026-10-22",
       "label": "10/22(木)",
+      "goal": "save",
       "riskyWords": []
     },
     {
-      "theme": "こだわり（コーヒー）",
-      "headline": "店内で丁寧に自家焙煎しています",
-      "caption": "こもれびカフェでは、コーヒー豆を店内で焙煎しています。\n\n焙煎したての豆で淹れる一杯は、香り豊かで心まで温まるような味わいです。\n\n駅からの帰り道や、仕事の合間の休憩に、挽きたての香りに包まれてみませんか。\n\n皆さまのご来店をお待ちしています。",
-      "hashtags": [
-        "こもれびカフェ",
-        "自家焙煎珈琲",
-        "コーヒーのある暮らし",
-        "ハンドドリップ",
-        "カフェタイム",
-        "駅近カフェ",
-        "丁寧な暮らし"
-      ],
-      "imageScene": "A close-up shot of raw, green coffee beans slowly transitioning to a roasted brown color inside a metal tray, illuminated by warm morning light. The focus is sharp on the beans, with a blurred background suggesting a quiet cafe environment. The bottom part of the composition is a clean, out-of-focus wooden surface suitable for text overlay.",
-      "checkItems": [
-        "店内で焙煎を行っている点に間違いがないか確認してください"
-      ],
-      "date": "2026-10-23",
-      "label": "10/23(金)",
-      "riskyWords": []
-    },
-    {
-      "theme": "お店の雰囲気",
-      "headline": "日常に寄り添うカフェの時間",
-      "caption": "駅の喧騒から少し離れて、静かな時間を過ごしてみませんか。\n\nこもれびカフェは、忙しい日々の中で少しだけ心休まる場所でありたいと思っています。\n\nお仕事前や午後のちょっとした休憩に、こだわりのコーヒーと焼き菓子をご用意してお待ちしております。\n\nぜひお気軽にお立ち寄りください。",
-      "hashtags": [
-        "こもれびカフェ",
-        "カフェ巡り",
-        "ひと息",
-        "カフェ時間",
-        "休憩時間",
-        "隠れ家カフェ",
-        "日常の癒やし"
-      ],
-      "imageScene": "A peaceful interior shot of a sunlit corner in a small cafe. A simple wooden table and a chair are neatly arranged. Warm light streams through a window, casting gentle shadows. The focus is on the inviting atmosphere of the room. The lower area of the image is simple and uncluttered, leaving space for text.",
-      "checkItems": [
-        "お店の雰囲気と写真のイメージが合致しているか確認してください"
-      ],
-      "date": "2026-10-24",
-      "label": "10/24(土)",
-      "riskyWords": []
-    },
-    {
-      "theme": "朝焼きのこだわり",
-      "headline": "毎朝お店で焼く、スコーンの香り",
-      "caption": "朝の空気の中で焼き上がる、スコーンの香ばしい匂い。\n\nこもれびカフェでは、皆様に焼きたてを楽しんでいただけるよう、毎朝お店でスコーンを焼いています。\n\nコーヒーとの相性もぴったりの優しい甘さです。\n\n週末のゆったりとした朝や午後のティータイムに、ぜひ焼きたてのスコーンを味わいに来てください。",
-      "hashtags": [
-        "こもれびカフェ",
-        "焼きたてスコーン",
-        "焼き菓子のある暮らし",
-        "朝活",
-        "カフェスイーツ",
-        "手作りおやつ",
-        "丁寧な暮らし"
-      ],
-      "imageScene": "A high-angle shot capturing the texture of a freshly baked scone on a rustic wire cooling rack. The soft morning light highlights the golden-brown crust. The background is a clean, neutral surface that is slightly out of focus, providing a calm area at the bottom for text placement.",
-      "checkItems": [
-        "毎朝焼いている点に間違いがないか確認してください"
-      ],
-      "date": "2026-10-25",
-      "label": "10/25(日)",
-      "riskyWords": []
-    },
-    {
-      "theme": "来店案内",
-      "headline": "駅から徒歩5分の場所で営業中",
-      "caption": "こもれびカフェは、駅から歩いて5分の場所にございます。\n\n近くでお仕事をされている方や、お買い物帰りにひと息つきたい方も、気軽にお立ち寄りいただける距離です。\n\n美味しいコーヒーと焼き菓子をご用意して、皆さまのご来店をお待ちしております。\n\n営業時間は【要確認】です。ぜひお気軽にお越しください。",
-      "hashtags": [
-        "こもれびカフェ",
-        "駅近カフェ",
-        "カフェ巡り",
-        "コーヒーブレイク",
-        "休憩スポット",
-        "駅周辺",
-        "カフェ好き"
-      ],
-      "imageScene": "A composition showing a cup of black coffee on a simple wooden table, with a blurred window view in the background suggesting a nearby street. The lighting is soft and natural. The table surface is clean and provides a large, out-of-focus area at the bottom for text.",
-      "checkItems": [
-        "駅からの距離が徒歩5分で間違いないか確認してください",
-        "営業時間の情報を確認し、入力してください"
-      ],
-      "date": "2026-10-26",
-      "label": "10/26(月)",
-      "riskyWords": []
-    },
-    {
-      "theme": "期間限定スイーツ",
-      "headline": "秋限定・かぼちゃスコーン(380円)",
-      "caption": "10月31日までの期間限定販売、かぼちゃスコーンのご紹介です。\n\n価格は税込380円。\n\nかぼちゃの風味を活かした素朴なスコーンは、今の季節にぴったりです。\n\nコーヒーと一緒に、秋の午後をゆったりと過ごしてみませんか。\n\n皆さまのお越しをお待ちしております。",
-      "hashtags": [
-        "こもれびカフェ",
-        "期間限定",
-        "かぼちゃスコーン",
-        "秋スイーツ",
-        "スコーン",
-        "焼き菓子",
-        "カフェ時間"
-      ],
-      "imageScene": "A close-up of a pumpkin scone on a rustic wooden board, accompanied by a small pile of coffee beans nearby. The light is warm and autumnal, casting soft shadows. The lower portion of the image is simple and uncluttered, providing space for text overlay.",
-      "checkItems": [
-        "10月31日までの期間限定であることを再確認してください",
-        "価格が税込380円であることを再確認してください"
-      ],
-      "date": "2026-10-27",
-      "label": "10/27(火)",
-      "riskyWords": []
-    },
-    {
-      "theme": "コーヒーのある生活",
-      "headline": "心を整えるコーヒーの時間",
-      "caption": "忙しい一日の中でも、少しだけ立ち止まって深呼吸を。\n\nこだわりの自家焙煎コーヒーは、そんなひと時に寄り添う味を目指しています。\n\nお仕事の合間や、帰り道に。\n\n一杯のコーヒーで、少しだけ心が軽くなるような時間を過ごしにいらしてください。\n\n皆さまのご来店を心よりお待ちしています。",
+      "theme": "カフェでの休憩時間",
+      "headline": "頑張る自分にコーヒーのご褒美を",
+      "caption": "仕事の合間に、ほっと一息ついてみませんか？\n\n駅からの帰り道や、忙しい仕事の合間に「こもれびカフェ」でゆっくりした時間を。\n\n店内で丁寧に焙煎したコーヒーと、毎朝焼いている自慢のスコーンをご用意してお待ちしています。\n\n「今日もお疲れ様！」と伝えたい友だちに、ぜひこの投稿を送ってみてください。",
       "hashtags": [
         "こもれびカフェ",
         "自家焙煎",
-        "コーヒーのある時間",
-        "カフェの癒やし",
-        "リフレッシュ",
-        "コーヒー好き",
-        "カフェタイム"
+        "カフェ休憩",
+        "自分へのご褒美",
+        "仕事帰り"
       ],
-      "imageScene": "A cinematic shot of a coffee cup with rising steam, set against a calm, softly lit background. The focus is on the steam and the top rim of the cup. The colors are muted and cozy. The lower third of the image is a plain, out-of-focus wooden table surface, suitable for text.",
+      "reelIdea": "お店の入り口からコーヒーを淹れる様子までのシネマティックな短編映像。",
+      "imageScene": "A close-up shot of a steaming ceramic mug filled with dark coffee, sitting on a wooden counter. Warm sunlight filters through a nearby window, creating soft shadows. The setting is peaceful and quiet, with out-of-focus background elements suggesting a cozy cafe interior.",
       "checkItems": [
-        "自家焙煎という強みをしっかり反映できているか確認してください"
+        "駅からの所要時間「徒歩5分」は正確であるか確認してください"
+      ],
+      "date": "2026-10-23",
+      "label": "10/23(金)",
+      "goal": "share",
+      "riskyWords": []
+    },
+    {
+      "theme": "コーヒーとスコーンの組み合わせ",
+      "headline": "あなたはどっち派？コーヒーか紅茶",
+      "caption": "カフェでのひと時、飲み物は何を選びますか？\n\n「こもれびカフェ」の自家焙煎コーヒーはもちろんですが、焼きたてスコーンには紅茶もよく合いますよね。\n\nコーヒー派か、紅茶派か。みなさんのこだわりをぜひコメントで教えてください！",
+      "hashtags": [
+        "こもれびカフェ",
+        "カフェタイム",
+        "スコーン好き",
+        "コーヒーの時間",
+        "紅茶派"
+      ],
+      "reelIdea": "コーヒーを注ぐ様子と紅茶を注ぐ様子を交互に繋いだテンポの良い動画。",
+      "imageScene": "A bright, high-angle shot featuring two different drinks on a table, one with a coffee mug and one with a tea cup, alongside a plate of scones. The scene is clean and organized, focusing on the textures of the drinks and pastries. Soft, neutral background.",
+      "checkItems": [
+        "紅茶の取り扱いがあるか再確認してください"
+      ],
+      "date": "2026-10-24",
+      "label": "10/24(土)",
+      "goal": "comment",
+      "riskyWords": []
+    },
+    {
+      "theme": "朝のスコーン焼き上がり",
+      "headline": "焼きたてスコーンの香りのヒミツ",
+      "caption": "毎朝お店で焼いているスコーンのこだわり\n\n「こもれびカフェ」では、毎日その日の分を店内のオーブンで焼き上げています。\n\n焼きたては外がサクッと、中はしっとり。\nこの食感を楽しんでいただきたくて、ひとつひとつ丁寧に準備しています。\n\n美味しいスコーンの食べ方ガイドとして、保存して活用してくださいね。",
+      "hashtags": [
+        "こもれびカフェ",
+        "焼きたてスコーン",
+        "朝のルーティン",
+        "手作りおやつ",
+        "カフェ巡り"
+      ],
+      "reelIdea": "オーブンから出したばかりのスコーンの湯気を捉えた映像。",
+      "imageScene": "An atmospheric shot of a wire cooling rack holding several fresh, golden-brown scones. The lighting is warm and golden, emphasizing the crumbly texture of the pastry. Soft focus on the background to highlight the scones in the foreground.",
+      "checkItems": [
+        "「毎朝焼いている」という事実に齟齬がないか確認してください"
+      ],
+      "date": "2026-10-25",
+      "label": "10/25(日)",
+      "goal": "save",
+      "riskyWords": []
+    },
+    {
+      "theme": "期間限定メニューの告知",
+      "headline": "10/31まで！かぼちゃのスコーン",
+      "caption": "期間限定のかぼちゃスコーン、もう食べましたか？\n\n秋の味覚をたっぷり詰め込んだ「かぼちゃのスコーン（税込380円）」は、10月31日までの限定販売です。\n\n季節の移ろいを感じながら、コーヒーと一緒にゆっくり味わってみてください。\n\nお店の営業時間は【要確認】です。お近くにお越しの際はぜひお立ち寄りください。",
+      "hashtags": [
+        "こもれびカフェ",
+        "期間限定",
+        "かぼちゃスイーツ",
+        "秋カフェ",
+        "スコーン"
+      ],
+      "reelIdea": "かぼちゃのスコーンを半分に割って、中身を見せるショート動画。",
+      "imageScene": "A clean, studio-like shot of a single pumpkin scone placed on a textured ceramic surface. The lighting is soft and directional, highlighting the natural texture and color of the pumpkin ingredients. The composition is simple and focuses on the food itself.",
+      "checkItems": [
+        "営業時間と定休日の情報を【要確認】に入れ替えてください"
+      ],
+      "date": "2026-10-26",
+      "label": "10/26(月)",
+      "goal": "visit",
+      "riskyWords": []
+    },
+    {
+      "theme": "カフェでの癒やし",
+      "headline": "忙しい日常を忘れるカフェ時間",
+      "caption": "ふと深呼吸したくなること、ありませんか？\n\nこだわりのコーヒー豆を店内で焙煎し、淹れたての香りで店内を満たしています。\n\n「こもれびカフェ」で過ごす時間は、誰にとっても穏やかなものであってほしいと思っています。\n\n明日からまた頑張ろうと思える、そんな場所を探している友だちにぜひ送ってみてください。",
+      "hashtags": [
+        "こもれびカフェ",
+        "カフェ時間",
+        "深呼吸",
+        "癒やしの時間",
+        "自家焙煎"
+      ],
+      "reelIdea": "店内の落ち着いた様子をゆっくりとパン（カメラ移動）で撮影した映像。",
+      "imageScene": "A serene, wide shot of an empty table inside the cafe with a soft glow from a nearby lamp. The atmosphere is calm and inviting, with gentle textures of wood and fabric. The focus is on the peaceful environment of the cafe.",
+      "checkItems": [
+        "店内の雰囲気が写真と乖離していないか確認してください"
+      ],
+      "date": "2026-10-27",
+      "label": "10/27(火)",
+      "goal": "share",
+      "riskyWords": []
+    },
+    {
+      "theme": "カフェの選び方ガイド",
+      "headline": "失敗しないカフェ選びの3つのポイント",
+      "caption": "良いカフェを見つけるためのチェックリスト\n\n心地よいカフェに出会うには、3つのポイントをチェックしてみてください。\n\n1. コーヒーの香りがしっかりしているか\n2. 席の間隔がゆったりしているか\n3. お店の人が丁寧に迎えてくれるか\n\nこもれびカフェも、皆様にとってそんな場所になれるよう大切に営業しています。\n\n自分だけのお気に入りリストを作るために、ぜひ保存しておいてくださいね。",
+      "hashtags": [
+        "こもれびカフェ",
+        "カフェ選び",
+        "カフェ巡り",
+        "コーヒーライフ",
+        "癒やしの空間"
+      ],
+      "reelIdea": "手帳にチェックリストを書き込む様子を上から撮影する。",
+      "imageScene": "A close-up of a rustic wooden table with a notebook and a pen, partially visible in the frame. Beside the notebook, a saucer and a cup of coffee add to the relaxed setting. Natural light creates a calm and intellectual vibe.",
+      "checkItems": [
+        "お店の接客スタイルと記事の内容が合致しているか確認してください"
       ],
       "date": "2026-10-28",
       "label": "10/28(水)",
+      "goal": "save",
       "riskyWords": []
     }
   ]

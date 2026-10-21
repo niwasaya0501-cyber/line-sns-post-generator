@@ -1,4 +1,5 @@
 import type { messagingApi } from "@line/bot-sdk";
+import { GOALS } from "./buzz";
 import { INDUSTRIES } from "./input";
 import type { ImageState, Plan } from "./plan";
 import { cardFile, planBaseUrl } from "./paths";
@@ -98,6 +99,17 @@ export function buildPlanCarousel(plan: Plan, images: ImageState[]): messagingAp
       spacing: "sm",
       contents: [
         { type: "text", text: `${post.label}　${post.theme}`, size: "xxs", color: MUTED, wrap: true },
+        ...(post.goal
+          ? [
+              {
+                type: "text" as const,
+                text: `${GOALS[post.goal].emoji} 狙い：${GOALS[post.goal].label}`,
+                size: "xxs" as const,
+                color: BRAND,
+                weight: "bold" as const,
+              },
+            ]
+          : []),
         { type: "text", text: truncate(post.caption, 50), size: "xs", wrap: true, maxLines: 3 },
         ...(post.checkItems.length > 0 || post.riskyWords.length > 0
           ? [{ type: "text" as const, text: "⚠ 確認が必要な箇所があります", size: "xxs" as const, color: "#B26A00" }]

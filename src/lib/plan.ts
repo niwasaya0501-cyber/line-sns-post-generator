@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { Goal } from "./buzz";
 import type { PlanInput } from "./input";
 import type { ScheduleSlot } from "./schedule";
 
@@ -6,8 +7,11 @@ import type { ScheduleSlot } from "./schedule";
 export const aiPostSchema = z.object({
   theme: z.string().describe("その日の投稿のテーマ（例: スタッフ紹介、季節のおすすめ）"),
   headline: z.string().describe("画像に重ねる見出し。全角14文字以内"),
-  caption: z.string().describe("Instagramの投稿文。絵文字を適度に使い、改行で読みやすく。200〜350文字"),
-  hashtags: z.array(z.string()).describe("ハッシュタグ。#は付けない。6〜10個"),
+  caption: z
+    .string()
+    .describe("Instagramの投稿文。1行目は全角20文字以内のフック。絵文字を適度に使い、改行で読みやすく。200〜350文字"),
+  hashtags: z.array(z.string()).describe("ハッシュタグ。#は付けない。3〜5個"),
+  reelIdea: z.string().describe("同じテーマをリール（15秒ほどの縦長動画）にする場合の撮り方。1〜2文"),
   imageScene: z
     .string()
     .describe("写真の撮影指示（英語1段落、60〜120語）。人物の顔のアップ・文字・ロゴ・看板は含めない"),
@@ -19,8 +23,10 @@ export const aiPlanSchema = z.object({
   posts: z.array(aiPostSchema),
 });
 
-export type Post = z.infer<typeof aiPostSchema> &
+export type Post = Omit<z.infer<typeof aiPostSchema>, "reelIdea"> & { reelIdea?: string } &
   ScheduleSlot & {
+    // 狙う反応。この機能を入れる前に作った投稿案には無い
+    goal?: Goal;
     riskyWords: string[];
   };
 

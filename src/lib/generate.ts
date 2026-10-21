@@ -1,4 +1,5 @@
 import { generateImage, generateText, Output } from "ai";
+import { assignGoals, normalizeHashtags } from "./buzz";
 import { IMAGE_MODELS, LOW_THINKING, TEXT_MODELS } from "./ai";
 import { findRiskyExpressions } from "./compliance";
 import type { PlanInput } from "./input";
@@ -38,10 +39,11 @@ async function tryInOrder<M, R>(
 
 export async function generatePlanText(id: string, input: PlanInput): Promise<Plan> {
   const slots = buildSchedule(input.frequency);
-  const prompt = buildPlanPrompt(input, slots);
+  const goals = assignGoals(slots.length);
+  const prompt = buildPlanPrompt(input, slots, goals);
 
   const output = await tryInOrder("投稿文", TEXT_MODELS, async (model) => {
-    const { output } = await generateText({
+    const { output, usage } = await generateText({
       model,
       output: Output.object({ schema: aiPlanSchema }),
       prompt,
@@ -49,6 +51,7 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
       maxRetries: 0,
       abortSignal: AbortSignal.timeout(TEXT_TIMEOUT_MS),
     });
+    console.info(`[ai] 投稿文 ${model.modelId} 入力${usage.inputTokens}・出力${usage.outputTokens}トークン`);
     if (output.posts.length < slots.length) {
       throw new Error(`投稿数が足りません: ${output.posts.length}/${slots.length}`);
     }
@@ -63,10 +66,11 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
     posts: slots.map((slot, i) => {
       const post = output.posts[i];
       const caption = stripHashtagLines(post.caption);
-      const hashtags = post.hashtags.map((t) => t.replace(/^[#＃]/, "").trim()).filter(Boolean);
+      const hashtags = normalizeHashtags(post.hashtags);
       return {
         ...post,
         ...slot,
+        goal: goals[i],
         caption,
         hashtags,
         riskyWords: findRiskyExpressions(
