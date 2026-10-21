@@ -87,6 +87,8 @@ export async function renderCard(plan: Plan, index: number, jpeg: Uint8Array | n
             fontSize: headlineFontSize(post.headline),
             fontWeight: 700,
             lineHeight: 1.3,
+            // 2行になるときに1〜2文字だけ次の行に残らないよう、行の長さをそろえる
+            textWrap: "balance",
             textShadow: "0 2px 16px rgba(0,0,0,0.35)",
           }}
         >
