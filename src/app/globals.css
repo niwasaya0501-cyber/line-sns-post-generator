@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f4ef;
+  --surface: #ffffff;
+  --foreground: #2b2b2b;
+  --muted: #6b6f6c;
+  --line: #e4ded4;
+  --brand: #3f5e5a;
+  --brand-soft: #e3ece9;
+  --warn: #8a5300;
+  --warn-soft: #fff3d6;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --font-sans: var(--font-zen), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 本文16px・タップできる部品は高さ44px以上を、全画面の基本にする */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Tailwind v4 では、他のクラスから @apply で使う独自クラスは @utility で定義する */
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 text-base font-bold transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white;
+}
+@utility btn-outline {
+  @apply btn border border-brand bg-surface text-brand;
+}
+@utility field {
+  @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-base outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-surface;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
 }
