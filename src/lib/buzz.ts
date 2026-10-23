@@ -1,3 +1,5 @@
+import { PURPOSE_GOALS, type Purpose } from "./design";
+
 // 「伸びやすい投稿」にするための決まりごと。
 // Instagramは、いいねの数よりも「保存」や「DMで友だちに送る（シェア）」をリーチ（表示される人数）に
 // 強く反映するとされる。そこで投稿ごとに、どの反応を狙うかをアプリ側で割り当て、文章の型を変える
@@ -35,6 +37,14 @@ export const GOALS = {
       "来店・予約したくなる内容にする（イベント・キャンペーンの入力があればその告知を優先）。" +
       "予約方法・営業時間・場所などで入力に無いものは【要確認】にする。最後は来店・予約を促す一言で終える",
   },
+  buy: {
+    label: "買いたくなる",
+    emoji: "🛒",
+    why: "選ばれる理由と買い方が分かると、「見て終わり」ではなく購入につながります",
+    prompt:
+      "商品・メニューを1つに絞り、魅力（選ばれる理由・使う場面・こだわり）を具体的に伝えて、買いたくなる内容にする。" +
+      "価格・在庫・販売方法・送料で入力に無いものは【要確認】にする。最後は買い方・注文方法を案内する一言で終える",
+  },
 } as const;
 
 export type Goal = keyof typeof GOALS;
@@ -47,6 +57,7 @@ export const SLIDE_RANGE: Record<Goal, readonly [number, number]> = {
   share: [3, 5],
   comment: [2, 4],
   visit: [3, 5],
+  buy: [3, 6],
 };
 
 // Instagramは手動なら20枚まで載せられるが、将来の自動投稿（公式API）は10枚までのため、10枚に合わせる
@@ -59,16 +70,11 @@ export function fitSlides<T>(inner: T[]): T[] {
   return [...inner.slice(0, max - 1), inner[inner.length - 1]];
 }
 
-// 投稿数ごとの組み合わせ。保存をいちばん多くし、来店の案内は多くても2回までにする
-const GOAL_PATTERNS: Record<number, Goal[]> = {
-  2: ["save", "visit"],
-  3: ["save", "share", "visit"],
-  5: ["save", "share", "comment", "save", "visit"],
-  7: ["save", "share", "comment", "save", "visit", "share", "save"],
-};
-
-export function assignGoals(count: number): Goal[] {
-  const pattern = GOAL_PATTERNS[count] ?? GOAL_PATTERNS[7];
+// 投稿数ごとの組み合わせは、お店の目的で変える（design.ts の PURPOSE_GOALS）。
+// 目的が未選択なら「知ってもらう」の組み合わせ（保存をいちばん多くし、来店の案内は多くても2回まで）
+export function assignGoals(count: number, purpose: Purpose = "awareness"): Goal[] {
+  const patterns = PURPOSE_GOALS[purpose];
+  const pattern = patterns[count] ?? patterns[7];
   return Array.from({ length: count }, (_, i) => pattern[i % pattern.length]);
 }
 

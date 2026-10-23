@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { GOALS, type Goal } from "@/lib/buzz";
+import { fallbackGradient, PALETTES, PURPOSES, resolveDesign, TASTES, type Design } from "@/lib/design";
 import { INDUSTRIES, type ImageMode } from "@/lib/input";
 import { cardFile } from "@/lib/paths";
 import type { ImageState, Plan, Post } from "@/lib/plan";
@@ -18,6 +19,7 @@ type Props = {
 export function PlanView({ plan, images, cardBase }: Props) {
   const [toast, setToast] = useState<string | null>(null);
   const industry = INDUSTRIES[plan.input.industry];
+  const design = resolveDesign(plan.input);
   const readyCount = images.filter((s) => s !== "pending").length;
   const goalCounts = (Object.keys(GOALS) as Goal[])
     .map((g) => ({
@@ -40,6 +42,17 @@ export function PlanView({ plan, images, cardBase }: Props) {
           {plan.input.shopName && `｜${plan.input.shopName}`}
         </p>
         <p className="mt-1 font-bold">「{plan.input.concept}」の1週間</p>
+        <ul className="mt-2 flex flex-wrap gap-2 text-sm">
+          {plan.input.purpose && (
+            <li className="rounded-full bg-brand-soft px-3 py-1 text-brand">
+              <span aria-hidden>{PURPOSES[plan.input.purpose].emoji} </span>目的：{PURPOSES[plan.input.purpose].label}
+            </li>
+          )}
+          <li className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1">
+            <span aria-hidden className="size-3 rounded-full" style={{ background: PALETTES[design.palette].accent }} />
+            デザイン：{TASTES[design.taste].label}・{PALETTES[design.palette].label}
+          </li>
+        </ul>
         <p className="mt-2">{plan.overview}</p>
         {goalCounts.length > 0 && (
           <div className="mt-3 border-t border-line pt-3">
@@ -88,7 +101,7 @@ export function PlanView({ plan, images, cardBase }: Props) {
               post={post}
               imageState={images[i]}
               cardSrc={`${cardBase}/${cardFile(i)}`}
-              industryColors={industry.colors}
+              design={design}
               imageMode={plan.input.imageMode ?? "ai"}
               shopName={plan.input.shopName}
               onToast={setToast}
@@ -118,7 +131,7 @@ function PostCard({
   post,
   imageState,
   cardSrc,
-  industryColors,
+  design,
   imageMode,
   shopName,
   onToast,
@@ -128,7 +141,7 @@ function PostCard({
   post: Post;
   imageState: ImageState;
   cardSrc: string;
-  industryColors: readonly [string, string];
+  design: Design;
   imageMode: ImageMode;
   shopName?: string;
   onToast: (message: string) => void;
@@ -177,7 +190,7 @@ function PostCard({
           imageMode={imageMode}
           imageState={imageState}
           coverSrc={cardSrc}
-          style={{ colors: industryColors, shopName }}
+          style={{ design, shopName }}
           onToast={onToast}
         />
       ) : (
@@ -186,7 +199,7 @@ function PostCard({
             <div
               className="absolute inset-0 flex flex-col justify-end p-6"
               style={{
-                background: `linear-gradient(160deg, ${industryColors[0]}, ${industryColors[1]})`,
+                background: `linear-gradient(160deg, ${fallbackGradient(design.palette).join(", ")})`,
               }}
             >
               {imageState === "pending" && <div className="shimmer absolute inset-0" />}

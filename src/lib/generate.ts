@@ -2,6 +2,7 @@ import { generateImage, generateText, Output } from "ai";
 import { assignGoals, findKeywordsInText, fitSlides, normalizeHashtags } from "./buzz";
 import { IMAGE_MODELS, LOW_THINKING, TEXT_MODELS } from "./ai";
 import { findRiskyExpressions } from "./compliance";
+import type { Design } from "./design";
 import type { PlanInput } from "./input";
 import { aiPlanSchema, type Plan } from "./plan";
 import { buildImagePrompt, buildPlanPrompt } from "./prompt";
@@ -39,7 +40,7 @@ async function tryInOrder<M, R>(
 
 export async function generatePlanText(id: string, input: PlanInput): Promise<Plan> {
   const slots = buildSchedule(input.frequency);
-  const goals = assignGoals(slots.length);
+  const goals = assignGoals(slots.length, input.purpose);
   const prompt = buildPlanPrompt(input, slots, goals);
 
   const output = await tryInOrder("投稿文", TEXT_MODELS, async (model) => {
@@ -86,11 +87,11 @@ export async function generatePlanText(id: string, input: PlanInput): Promise<Pl
   };
 }
 
-export async function generatePostImage(scene: string, deadline: number): Promise<Uint8Array> {
+export async function generatePostImage(scene: string, design: Design, deadline: number): Promise<Uint8Array> {
   return tryInOrder("画像", IMAGE_MODELS, async (model) => {
     const { image } = await generateImage({
       model,
-      prompt: buildImagePrompt(scene),
+      prompt: buildImagePrompt(scene, design),
       aspectRatio: "4:5",
       maxRetries: 0,
       abortSignal: AbortSignal.timeout(IMAGE_TIMEOUT_MS),

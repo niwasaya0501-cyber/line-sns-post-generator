@@ -10,6 +10,8 @@ import {
   type Industry,
 } from "@/lib/input";
 import { Spinner } from "@/components/Spinner";
+import { INDUSTRY_DESIGN, PURPOSES, type Design, type Purpose } from "@/lib/design";
+import { DesignPicker } from "./DesignPicker";
 import { LivePlan } from "./LivePlan";
 
 const LIFF_ID = process.env.NEXT_PUBLIC_LIFF_ID;
@@ -31,6 +33,10 @@ export default function NewPlanPage() {
   const [industry, setIndustry] = useState<Industry | null>(null);
   const [concept, setConcept] = useState("");
   const [imageMode, setImageMode] = useState<ImageMode>("ai");
+  const [purpose, setPurpose] = useState<Purpose | null>(null);
+  // デザインは、自分で選ぶまでは業種のおすすめに合わせて変わる
+  const [chosenDesign, setChosenDesign] = useState<Design | null>(null);
+  const design = chosenDesign ?? (industry ? INDUSTRY_DESIGN[industry] : INDUSTRY_DESIGN.other);
   const [showDetails, setShowDetails] = useState(false);
   const [shopName, setShopName] = useState("");
   const [area, setArea] = useState("");
@@ -74,7 +80,20 @@ export default function NewPlanPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           idToken,
-          input: { industry, concept, imageMode, shopName, area, frequency, event, strengths, target },
+          input: {
+            industry,
+            concept,
+            imageMode,
+            purpose: purpose ?? undefined,
+            taste: design.taste,
+            palette: design.palette,
+            shopName,
+            area,
+            frequency,
+            event,
+            strengths,
+            target,
+          },
         }),
       });
       if (!res.ok) {
@@ -153,6 +172,47 @@ export default function NewPlanPage() {
             className="field mt-2 resize-none"
           />
         </label>
+
+        <fieldset>
+          <legend className="font-bold">いちばんの目的</legend>
+          <p className="text-sm text-muted">目的に合わせて、1週間の投稿の組み合わせと文章を変えます</p>
+          <div className="mt-3 grid gap-2">
+            {(Object.keys(PURPOSES) as Purpose[]).map((key) => {
+              const selected = purpose === key;
+              return (
+                <button
+                  type="button"
+                  key={key}
+                  onClick={() => setPurpose(selected ? null : key)}
+                  aria-pressed={selected}
+                  className={`flex min-h-14 items-center gap-3 rounded-xl border px-3 py-2 text-left transition ${
+                    selected ? "border-brand bg-brand-soft text-brand ring-2 ring-brand" : "border-line bg-surface"
+                  }`}
+                >
+                  <span aria-hidden className="text-xl">
+                    {PURPOSES[key].emoji}
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-bold leading-snug">{PURPOSES[key].label}</span>
+                    <span className="block text-sm leading-snug text-muted">{PURPOSES[key].note}</span>
+                  </span>
+                  {selected && <span aria-hidden>✓</span>}
+                </button>
+              );
+            })}
+          </div>
+          {!purpose && <p className="mt-2 text-sm text-muted">選ばなければ、バランスよく組み合わせます</p>}
+        </fieldset>
+
+        <section aria-labelledby="design-heading">
+          <h2 id="design-heading" className="font-bold">
+            画像のデザイン
+          </h2>
+          <p className="text-sm text-muted">世の中でよく見られる見せ方から、業種に合うものをおすすめしています</p>
+          <div className="mt-3">
+            <DesignPicker industry={industry} design={design} onChange={setChosenDesign} shopName={shopName} />
+          </div>
+        </section>
 
         <fieldset>
           <legend className="font-bold">画像</legend>

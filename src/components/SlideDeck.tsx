@@ -29,7 +29,7 @@ export function SlideDeck({ post, imageMode, imageState, coverSrc, style, onToas
   const scroller = useRef<HTMLDivElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
-  const [light, dark] = style.colors;
+  const { taste, palette } = style.design;
   const shopName = style.shopName;
 
   // 画面を離れるときに、作った画像のURLを片付ける
@@ -39,7 +39,7 @@ export function SlideDeck({ post, imageMode, imageState, coverSrc, style, onToas
   // スライドを描く（写真を選び直したときも、ここで描き直す）
   useEffect(() => {
     let cancelled = false;
-    const deckStyle: DeckStyle = { colors: [light, dark], shopName };
+    const deckStyle: DeckStyle = { design: { taste, palette }, shopName };
     (async () => {
       for (let i = 0; i < total; i++) {
         if (i === 0 && useServerCover) continue;
@@ -63,7 +63,7 @@ export function SlideDeck({ post, imageMode, imageState, coverSrc, style, onToas
     return () => {
       cancelled = true;
     };
-  }, [post, photos, light, dark, shopName, total, useServerCover]);
+  }, [post, photos, taste, palette, shopName, total, useServerCover]);
 
   function onScroll() {
     const el = scroller.current;

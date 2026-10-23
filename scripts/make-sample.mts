@@ -3,6 +3,7 @@
 // 使い方: npx tsx --env-file=.env.local scripts/make-sample.mts
 import { mkdirSync, writeFileSync } from "node:fs";
 import { renderCard } from "../src/lib/card";
+import { resolveDesign } from "../src/lib/design";
 import { generatePlanText, generatePostImage } from "../src/lib/generate";
 import { planInputSchema } from "../src/lib/input";
 import { cardFile, FINAL_FILE, PLAN_FILE } from "../src/lib/paths";
@@ -34,7 +35,7 @@ for (const [i, post] of plan.posts.entries()) {
   let jpeg: Uint8Array | null = null;
   for (let n = 0; n < 4 && !jpeg; n++) {
     try {
-      jpeg = await generatePostImage(post.imageScene, Date.now() + 120_000);
+      jpeg = await generatePostImage(post.imageScene, resolveDesign(plan.input), Date.now() + 120_000);
     } catch (e) {
       console.log("画像失敗", i, n, e instanceof Error ? e.message.slice(0, 100) : e);
     }

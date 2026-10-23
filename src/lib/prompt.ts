@@ -1,4 +1,5 @@
 import { INDUSTRIES, type PlanInput } from "./input";
+import { PALETTES, PURPOSES, resolveDesign, TASTES, type Design } from "./design";
 import { GOALS, MAX_HASHTAGS, MAX_SLIDES, SLIDE_RANGE, type Goal } from "./buzz";
 import { RISKY_WORDS_FOR_PROMPT } from "./compliance";
 import type { ScheduleSlot } from "./schedule";
@@ -18,6 +19,8 @@ export function buildPlanPrompt(input: PlanInput, slots: ScheduleSlot[], goals: 
       return `${i + 1}. ${s.label}　狙い: ${GOALS[goals[i]].label}（${goals[i]}）　slides: ${min - 1}〜${max - 1}枚（表紙を含めて${min}〜${max}枚）`;
     })
     .join("\n");
+  const purpose = input.purpose ? PURPOSES[input.purpose] : null;
+  const taste = TASTES[resolveDesign(input).taste];
   const goalRules = [...new Set(goals)]
     .map((g) => `- ${GOALS[g].label}（${g}）: ${GOALS[g].prompt}`)
     .join("\n");
@@ -33,6 +36,13 @@ ${quote("エリア（駅名・地域名）", input.area)}
 ${quote("今月のイベント・キャンペーン", input.event)}
 ${quote("強み・こだわり", input.strengths)}
 ${quote("来てほしいお客様", input.target)}
+
+# この1週間の目的
+${purpose ? `${purpose.label}: ${purpose.prompt}` : "バランスよく（新しいお客様に知ってもらいつつ、来店にもつなげる）"}
+overview には、この目的に向けてどう組み立てたかを書く。
+
+# 文章の雰囲気（投稿画像のデザイン「${taste.label}」に合わせる）
+${taste.tone}
 
 # 投稿日と、それぞれの投稿で狙う反応（この順番で、ちょうど${slots.length}件作る）
 ${days}
@@ -63,6 +73,8 @@ ${goalRules}
   すべての投稿の本文に、searchKeywords の中から1〜2個を必ず入れる。表記は searchKeywords と同じにする
   （「自家焙煎珈琲」を「自家焙煎コーヒー」に変えない）。空白で区切った言葉は、文の中で離れていてもよい
   （「吉祥寺 カフェ」→「吉祥寺駅から歩いてすぐのカフェ」）。不自然に詰め込まず、同じ言葉を何度も繰り返さない。
+- 見出し・1行目で「3選」「5つのコツ」「2択」のように数を示したら、その数のとおりに中身をすべて具体的に書く
+  （slides なら1つにつき1枚、slides が少ない場合は caption の中に「①〜」のように全部書く）。数を示して中身を書かないのはNG。
 - テーマは毎日変える（こだわり、メニュー・商品、季節の話題、豆知識、お店の裏側・スタッフの想い、来店の案内など）。
 
 # 検索ワード（searchKeywords）
@@ -93,10 +105,12 @@ ${goalRules}
   文字・ロゴ・看板・値札・人の顔のアップは入れない。見出しを重ねるため、画面の下3分の1は落ち着いた余白にする。`;
 }
 
-export function buildImagePrompt(scene: string): string {
-  return `A natural, high-quality photograph for a small local business Instagram post.
+export function buildImagePrompt(scene: string, design: Design): string {
+  return `A high-quality photograph for a small local business Instagram post.
 ${scene}
+Mood: ${TASTES[design.taste].imageMood}.
+Color palette: lean toward ${PALETTES[design.palette].imageColor}, while keeping the subject's natural colors realistic.
 Rules: The image must contain absolutely no text, letters, numbers, logos, signs, labels or watermarks.
 Leave the bottom third of the frame calm and uncluttered so a caption can be overlaid later.
-Soft natural light, gentle colors, realistic, shot on a 35mm lens.`;
+Realistic, shot on a 35mm lens.`;
 }

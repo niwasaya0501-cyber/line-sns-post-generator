@@ -7,9 +7,9 @@ export const TEXT_WIDTH = WIDTH - MARGIN * 2;
 
 // 日本語は単語の途中でも改行されるため、なるべく1行に収まる大きさにする（長すぎる場合は2行）
 // 半角の英数字・記号は全角の約半分の幅として数える
-export function headlineFontSize(headline: string): number {
+export function headlineFontSize(headline: string, width = TEXT_WIDTH, max = 88, min = 56): number {
   const ems = [...headline].reduce((sum, ch) => sum + (/[\x20-\x7e]/.test(ch) ? 0.55 : 1), 0);
-  return Math.max(56, Math.min(88, Math.floor(TEXT_WIDTH / ems)));
+  return Math.max(min, Math.min(max, Math.floor(width / ems)));
 }
 
 // 文字の折り返し。画面（canvas）でもテストでも使えるよう、幅の測り方は外から受け取る

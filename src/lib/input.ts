@@ -1,14 +1,15 @@
 import { z } from "zod";
+import { PALETTES, PURPOSES, TASTES, type Palette, type Purpose, type Taste } from "./design";
 
-// 業種ごとの表示名・画像の雰囲気・代替背景の色。
+// 業種ごとの表示名。おすすめのデザイン（雰囲気・色）は design.ts の INDUSTRY_DESIGN。
 // strict=true の業種（美容・健康系）は、効果をうたう表現のチェックも行う
 export const INDUSTRIES = {
-  hair: { label: "美容院・ヘアサロン", short: "美容院", emoji: "💇", strict: true, colors: ["#C8A98B", "#6E5644"] },
-  food: { label: "飲食店・カフェ", short: "飲食・カフェ", emoji: "🍽️", strict: false, colors: ["#E9B872", "#9C5B2E"] },
-  seitai: { label: "整体・マッサージ", short: "整体・マッサージ", emoji: "💆", strict: true, colors: ["#A8C3A0", "#4F6B4A"] },
-  nail: { label: "ネイル・まつげ", short: "ネイル・まつげ", emoji: "💅", strict: true, colors: ["#E8B4C0", "#9A5466"] },
-  retail: { label: "物販・雑貨", short: "物販・雑貨", emoji: "🛍️", strict: false, colors: ["#A9BFD8", "#45607E"] },
-  other: { label: "その他", short: "その他", emoji: "✨", strict: false, colors: ["#C9C3B8", "#5E584F"] },
+  hair: { label: "美容院・ヘアサロン", short: "美容院", emoji: "💇", strict: true },
+  food: { label: "飲食店・カフェ", short: "飲食・カフェ", emoji: "🍽️", strict: false },
+  seitai: { label: "整体・マッサージ", short: "整体・マッサージ", emoji: "💆", strict: true },
+  nail: { label: "ネイル・まつげ", short: "ネイル・まつげ", emoji: "💅", strict: true },
+  retail: { label: "物販・雑貨", short: "物販・雑貨", emoji: "🛍️", strict: false },
+  other: { label: "その他", short: "その他", emoji: "✨", strict: false },
 } as const;
 
 export type Industry = keyof typeof INDUSTRIES;
@@ -52,6 +53,10 @@ export const planInputSchema = z.object({
     .enum(Object.keys(FREQUENCIES) as [Frequency, ...Frequency[]])
     .default("daily"),
   imageMode: z.enum(Object.keys(IMAGE_MODES) as [ImageMode, ...ImageMode[]]).default("ai"),
+  // デザインと目的は任意。未選択なら業種のおすすめ・バランス型を使う（design.ts の resolveDesign / assignGoals）
+  taste: z.enum(Object.keys(TASTES) as [Taste, ...Taste[]]).optional(),
+  palette: z.enum(Object.keys(PALETTES) as [Palette, ...Palette[]]).optional(),
+  purpose: z.enum(Object.keys(PURPOSES) as [Purpose, ...Purpose[]]).optional(),
   event: optionalText(300),
   strengths: optionalText(300),
   target: optionalText(200),

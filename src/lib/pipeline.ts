@@ -4,6 +4,7 @@ import { pushMessage } from "./line";
 import { buildFailureMessage, buildPlanCarousel } from "./messages";
 import type { ImageState, PlanEvent } from "./plan";
 import { renderCard } from "./card";
+import { resolveDesign } from "./design";
 import { saveCard, saveFinal, savePlan } from "./store";
 
 // 画像モデルは同時に頼みすぎると429になるため、同時実行数を絞る
@@ -50,13 +51,14 @@ export async function runPlan(
   }
 
   const images: ImageState[] = plan.posts.map(() => "pending");
+  const design = resolveDesign(plan.input);
   const deadline = Date.now() + IMAGE_DEADLINE_MS;
   await mapWithConcurrency(plan.posts, IMAGE_CONCURRENCY, async (post, i) => {
     let jpeg: Uint8Array | null = null;
     try {
-      jpeg = await generatePostImage(post.imageScene, deadline);
+      jpeg = await generatePostImage(post.imageScene, design, deadline);
     } catch (err) {
-      // 画像は失敗しても、業種色の背景＋見出しのカードで代替できるので全体は止めない
+      // 画像は失敗しても、選んだ色の背景＋見出しのカードで代替できるので全体は止めない
       console.error("[plan] 画像の生成に失敗", id, i, err instanceof Error ? err.message : err);
     }
     try {
